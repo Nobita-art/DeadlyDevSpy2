@@ -1,0 +1,13 @@
+{
+  "name": "fasonbot-dashboard",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.1",
+    "uuid": "^9.0.1",
+    "ws": "^8.20.0"
+  }
+}

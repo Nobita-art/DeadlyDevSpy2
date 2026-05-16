@@ -1,0 +1,427 @@
+﻿2026-05-16T19:33:27.3215252Z Current runner version: '2.334.0'
+2026-05-16T19:33:27.3291289Z ##[group]Runner Image Provisioner
+2026-05-16T19:33:27.3292408Z Hosted Compute Agent
+2026-05-16T19:33:27.3293219Z Version: 20260213.493
+2026-05-16T19:33:27.3294198Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-05-16T19:33:27.3295232Z Build Date: 2026-02-13T00:28:41Z
+2026-05-16T19:33:27.3296314Z Worker ID: {0a7721b7-ea35-439b-a763-9178cb44ec74}
+2026-05-16T19:33:27.3297270Z Azure Region: centralus
+2026-05-16T19:33:27.3298234Z ##[endgroup]
+2026-05-16T19:33:27.3300499Z ##[group]Operating System
+2026-05-16T19:33:27.3301370Z Ubuntu
+2026-05-16T19:33:27.3302179Z 24.04.4
+2026-05-16T19:33:27.3302922Z LTS
+2026-05-16T19:33:27.3303544Z ##[endgroup]
+2026-05-16T19:33:27.3304380Z ##[group]Runner Image
+2026-05-16T19:33:27.3305193Z Image: ubuntu-24.04
+2026-05-16T19:33:27.3305910Z Version: 20260513.135.3
+2026-05-16T19:33:27.3307997Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260513.135/images/ubuntu/Ubuntu2404-Readme.md
+2026-05-16T19:33:27.3330959Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260513.135
+2026-05-16T19:33:27.3332664Z ##[endgroup]
+2026-05-16T19:33:27.3334113Z ##[group]GITHUB_TOKEN Permissions
+2026-05-16T19:33:27.3337003Z Contents: write
+2026-05-16T19:33:27.3337837Z Metadata: read
+2026-05-16T19:33:27.3338764Z ##[endgroup]
+2026-05-16T19:33:27.3342312Z Secret source: Actions
+2026-05-16T19:33:27.3343785Z Prepare workflow directory
+2026-05-16T19:33:27.4569817Z Prepare all required actions
+2026-05-16T19:33:27.4664077Z Getting action download info
+2026-05-16T19:33:27.9007761Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-05-16T19:33:28.0458911Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+2026-05-16T19:33:28.6484376Z Download action repository 'softprops/action-gh-release@v1' (SHA:de2c0eb89ae2a093876385947365aca7b0e5f844)
+2026-05-16T19:33:29.0054584Z Complete job name: build
+2026-05-16T19:33:29.0718445Z ##[group]Run actions/checkout@v4
+2026-05-16T19:33:29.0719448Z with:
+2026-05-16T19:33:29.0719836Z   persist-credentials: true
+2026-05-16T19:33:29.0720303Z   repository: Nobita-art/fusionspy
+2026-05-16T19:33:29.0720973Z   token: ***
+2026-05-16T19:33:29.0721351Z   ssh-strict: true
+2026-05-16T19:33:29.0721733Z   ssh-user: git
+2026-05-16T19:33:29.0722116Z   clean: true
+2026-05-16T19:33:29.0722506Z   sparse-checkout-cone-mode: true
+2026-05-16T19:33:29.0722971Z   fetch-depth: 1
+2026-05-16T19:33:29.0723347Z   fetch-tags: false
+2026-05-16T19:33:29.0723738Z   show-progress: true
+2026-05-16T19:33:29.0724143Z   lfs: false
+2026-05-16T19:33:29.0724514Z   submodules: false
+2026-05-16T19:33:29.0724906Z   set-safe-directory: true
+2026-05-16T19:33:29.0725485Z env:
+2026-05-16T19:33:29.0725875Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:29.0726368Z   BUILD_TYPE: release
+2026-05-16T19:33:29.0726762Z   CREATE_RELEASE: yes
+2026-05-16T19:33:29.0727150Z   IS_PRERELEASE: yes
+2026-05-16T19:33:29.0727608Z   APP_NAME: PakDB
+2026-05-16T19:33:29.0727974Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:29.0728346Z ##[endgroup]
+2026-05-16T19:33:29.1873682Z Syncing repository: Nobita-art/fusionspy
+2026-05-16T19:33:29.1875902Z ##[group]Getting Git version info
+2026-05-16T19:33:29.1876610Z Working directory is '/home/runner/work/fusionspy/fusionspy'
+2026-05-16T19:33:29.1877957Z [command]/usr/bin/git version
+2026-05-16T19:33:29.1906796Z git version 2.54.0
+2026-05-16T19:33:29.1961130Z ##[endgroup]
+2026-05-16T19:33:29.1976091Z Temporarily overriding HOME='/home/runner/work/_temp/4d67f525-e3c7-4c02-b974-fd4ccec5d7fe' before making global git config changes
+2026-05-16T19:33:29.1978995Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-16T19:33:29.1984380Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/fusionspy/fusionspy
+2026-05-16T19:33:29.2034306Z Deleting the contents of '/home/runner/work/fusionspy/fusionspy'
+2026-05-16T19:33:29.2040039Z ##[group]Initializing the repository
+2026-05-16T19:33:29.2045739Z [command]/usr/bin/git init /home/runner/work/fusionspy/fusionspy
+2026-05-16T19:33:29.2126174Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-05-16T19:33:29.2127626Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-05-16T19:33:29.2129348Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-05-16T19:33:29.2130369Z hint: call:
+2026-05-16T19:33:29.2130885Z hint:
+2026-05-16T19:33:29.2131554Z hint: 	git config --global init.defaultBranch <name>
+2026-05-16T19:33:29.2132387Z hint:
+2026-05-16T19:33:29.2133151Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-05-16T19:33:29.2134461Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-05-16T19:33:29.2135529Z hint:
+2026-05-16T19:33:29.2136066Z hint: 	git branch -m <name>
+2026-05-16T19:33:29.2136777Z hint:
+2026-05-16T19:33:29.2137648Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-05-16T19:33:29.2139487Z Initialized empty Git repository in /home/runner/work/fusionspy/fusionspy/.git/
+2026-05-16T19:33:29.2149420Z [command]/usr/bin/git remote add origin https://github.com/Nobita-art/fusionspy
+2026-05-16T19:33:29.2193889Z ##[endgroup]
+2026-05-16T19:33:29.2195218Z ##[group]Disabling automatic garbage collection
+2026-05-16T19:33:29.2197569Z [command]/usr/bin/git config --local gc.auto 0
+2026-05-16T19:33:29.2233865Z ##[endgroup]
+2026-05-16T19:33:29.2235267Z ##[group]Setting up auth
+2026-05-16T19:33:29.2242852Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-05-16T19:33:29.2280307Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-05-16T19:33:29.2603806Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-16T19:33:29.2642199Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-05-16T19:33:29.2924589Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-16T19:33:29.2959774Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-05-16T19:33:29.3868005Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-05-16T19:33:29.3874290Z ##[endgroup]
+2026-05-16T19:33:29.3877402Z ##[group]Fetching the repository
+2026-05-16T19:33:29.3879671Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +42e34c081c0cb6e8ac8212c5395a888b8c4c26c7:refs/remotes/origin/main
+2026-05-16T19:33:30.2589963Z From https://github.com/Nobita-art/fusionspy
+2026-05-16T19:33:30.2592448Z  * [new ref]         42e34c081c0cb6e8ac8212c5395a888b8c4c26c7 -> origin/main
+2026-05-16T19:33:30.2597229Z ##[endgroup]
+2026-05-16T19:33:30.2599671Z ##[group]Determining the checkout info
+2026-05-16T19:33:30.2602191Z ##[endgroup]
+2026-05-16T19:33:30.2603633Z [command]/usr/bin/git sparse-checkout disable
+2026-05-16T19:33:30.2634732Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-05-16T19:33:30.2666279Z ##[group]Checking out the ref
+2026-05-16T19:33:30.2670341Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-05-16T19:33:30.3127677Z Switched to a new branch 'main'
+2026-05-16T19:33:30.3135610Z branch 'main' set up to track 'origin/main'.
+2026-05-16T19:33:30.3141622Z ##[endgroup]
+2026-05-16T19:33:30.3286531Z [command]/usr/bin/git log -1 --format=%H
+2026-05-16T19:33:30.3289306Z 42e34c081c0cb6e8ac8212c5395a888b8c4c26c7
+2026-05-16T19:33:30.3527062Z ##[group]Run GRADLE="./app/build.gradle"
+2026-05-16T19:33:30.3529036Z [36;1mGRADLE="./app/build.gradle"[0m
+2026-05-16T19:33:30.3531094Z [36;1mV_NAME=$(grep "versionName" "$GRADLE" | sed 's/.*versionName[ =]*"\{0,1\}//;s/"//g')[0m
+2026-05-16T19:33:30.3533782Z [36;1mV_CODE=$(grep "versionCode" "$GRADLE" | sed 's/.*versionCode[ =]*//')[0m
+2026-05-16T19:33:30.3535597Z [36;1m[ -n "" ] && V_NAME=""[0m
+2026-05-16T19:33:30.3537120Z [36;1m[ -z "$V_NAME" ] && V_NAME="1.0.0-$(git rev-parse --short HEAD)"[0m
+2026-05-16T19:33:30.3539040Z [36;1mecho "name=$V_NAME" >> $GITHUB_OUTPUT[0m
+2026-05-16T19:33:30.3540529Z [36;1mecho "code=$V_CODE" >> $GITHUB_OUTPUT[0m
+2026-05-16T19:33:30.3584320Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:30.3585457Z env:
+2026-05-16T19:33:30.3586607Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:30.3587923Z   BUILD_TYPE: release
+2026-05-16T19:33:30.3589187Z   CREATE_RELEASE: yes
+2026-05-16T19:33:30.3590232Z   IS_PRERELEASE: yes
+2026-05-16T19:33:30.3591432Z   APP_NAME: PakDB
+2026-05-16T19:33:30.3592406Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:30.3593614Z ##[endgroup]
+2026-05-16T19:33:30.3918400Z ##[group]Run FILE="./app/src/main/res/values/strings.xml"
+2026-05-16T19:33:30.3920413Z [36;1mFILE="./app/src/main/res/values/strings.xml"[0m
+2026-05-16T19:33:30.3922553Z [36;1msed -i "s|<string name=\"app_name\">.*</string>|<string name=\"app_name\">$APP_NAME</string>|" "$FILE"[0m
+2026-05-16T19:33:30.3962714Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:30.3963781Z env:
+2026-05-16T19:33:30.3964667Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:30.3966050Z   BUILD_TYPE: release
+2026-05-16T19:33:30.3966981Z   CREATE_RELEASE: yes
+2026-05-16T19:33:30.3967997Z   IS_PRERELEASE: yes
+2026-05-16T19:33:30.3969306Z   APP_NAME: PakDB
+2026-05-16T19:33:30.3970256Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:30.3971195Z ##[endgroup]
+2026-05-16T19:33:30.4206747Z ##[group]Run FILE="./app/src/main/java/com/fasonbot/app/config/BotConfig.kt"
+2026-05-16T19:33:30.4209012Z [36;1mFILE="./app/src/main/java/com/fasonbot/app/config/BotConfig.kt"[0m
+2026-05-16T19:33:30.4211338Z [36;1mURL="wss://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev/ws"[0m
+2026-05-16T19:33:30.4213176Z [36;1m[0m
+2026-05-16T19:33:30.4213944Z [36;1mif [ -n "$URL" ]; then[0m
+2026-05-16T19:33:30.4215721Z [36;1m  sed -i "s|private const val SERVER_URL = \".*\"|private const val SERVER_URL = \"$URL\"|" "$FILE"[0m
+2026-05-16T19:33:30.4217634Z [36;1m  echo "Server URL set to: $URL"[0m
+2026-05-16T19:33:30.4218995Z [36;1melse[0m
+2026-05-16T19:33:30.4220068Z [36;1m  echo "No server URL provided, using hardcoded value"[0m
+2026-05-16T19:33:30.4221412Z [36;1mfi[0m
+2026-05-16T19:33:30.4257920Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:30.4258988Z env:
+2026-05-16T19:33:30.4259806Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:30.4260980Z   BUILD_TYPE: release
+2026-05-16T19:33:30.4261846Z   CREATE_RELEASE: yes
+2026-05-16T19:33:30.4262710Z   IS_PRERELEASE: yes
+2026-05-16T19:33:30.4263547Z   APP_NAME: PakDB
+2026-05-16T19:33:30.4264347Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:30.4265158Z ##[endgroup]
+2026-05-16T19:33:30.4352362Z Server URL set to: wss://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev/ws
+2026-05-16T19:33:30.4420744Z ##[group]Run TOKEN="${INPUT_TOKEN:-$SECRET_TOKEN}"
+2026-05-16T19:33:30.4422105Z [36;1mTOKEN="${INPUT_TOKEN:-$SECRET_TOKEN}"[0m
+2026-05-16T19:33:30.4423356Z [36;1mCHAT="${INPUT_ID:-$SECRET_ID}"[0m
+2026-05-16T19:33:30.4424453Z [36;1m[0m
+2026-05-16T19:33:30.4425283Z [36;1mif [ "$AUTO_HIDE_ICON" = "yes" ]; then[0m
+2026-05-16T19:33:30.4426435Z [36;1m  HIDE_ICON="true"[0m
+2026-05-16T19:33:30.4427338Z [36;1melse[0m
+2026-05-16T19:33:30.4428126Z [36;1m  HIDE_ICON="false"[0m
+2026-05-16T19:33:30.4429273Z [36;1mfi[0m
+2026-05-16T19:33:30.4430006Z [36;1m[0m
+2026-05-16T19:33:30.4431175Z [36;1mFILE="./app/src/main/java/com/fasonbot/app/config/BotConfig.kt"[0m
+2026-05-16T19:33:30.4432670Z [36;1m[0m
+2026-05-16T19:33:30.4434328Z [36;1msed -i "s|private const val AUTO_HIDE_ICON = .*|private const val AUTO_HIDE_ICON = $HIDE_ICON|" "$FILE"[0m
+2026-05-16T19:33:30.4436504Z [36;1m[0m
+2026-05-16T19:33:30.4437387Z [36;1mif [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then[0m
+2026-05-16T19:33:30.4439244Z [36;1m  echo "No credentials provided - using hardcoded defaults"[0m
+2026-05-16T19:33:30.4440664Z [36;1m  exit 0[0m
+2026-05-16T19:33:30.4441489Z [36;1mfi[0m
+2026-05-16T19:33:30.4442228Z [36;1m[0m
+2026-05-16T19:33:30.4443054Z [36;1mecho "Injecting credentials..."[0m
+2026-05-16T19:33:30.4444131Z [36;1m[0m
+2026-05-16T19:33:30.4445643Z [36;1msed -i "s|private const val BOT_TOKEN = \".*\"|private const val BOT_TOKEN = \"$TOKEN\"|" "$FILE"[0m
+2026-05-16T19:33:30.4448189Z [36;1msed -i "s|private const val CHAT_ID = \".*\"|private const val CHAT_ID = \"$CHAT\"|" "$FILE"[0m
+2026-05-16T19:33:30.4450151Z [36;1m[0m
+2026-05-16T19:33:30.4451404Z [36;1mecho "Credentials injected successfully (autoHideIcon: $HIDE_ICON)"[0m
+2026-05-16T19:33:30.4499214Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:30.4500545Z env:
+2026-05-16T19:33:30.4501686Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:30.4503232Z   BUILD_TYPE: release
+2026-05-16T19:33:30.4504096Z   CREATE_RELEASE: yes
+2026-05-16T19:33:30.4504945Z   IS_PRERELEASE: yes
+2026-05-16T19:33:30.4505773Z   APP_NAME: PakDB
+2026-05-16T19:33:30.4506559Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:30.4507385Z   INPUT_TOKEN: 
+2026-05-16T19:33:30.4508144Z   INPUT_ID: 
+2026-05-16T19:33:30.4509209Z   SECRET_TOKEN: 
+2026-05-16T19:33:30.4509981Z   SECRET_ID: 
+2026-05-16T19:33:30.4510714Z ##[endgroup]
+2026-05-16T19:33:30.4598156Z No credentials provided - using hardcoded defaults
+2026-05-16T19:33:30.4794192Z ##[group]Run actions/setup-java@v4
+2026-05-16T19:33:30.4795180Z with:
+2026-05-16T19:33:30.4795906Z   distribution: temurin
+2026-05-16T19:33:30.4796754Z   java-version: 17
+2026-05-16T19:33:30.4797527Z   cache: gradle
+2026-05-16T19:33:30.4798299Z   java-package: jdk
+2026-05-16T19:33:30.4799396Z   check-latest: false
+2026-05-16T19:33:30.4800220Z   server-id: github
+2026-05-16T19:33:30.4801062Z   server-username: GITHUB_ACTOR
+2026-05-16T19:33:30.4802024Z   server-password: GITHUB_TOKEN
+2026-05-16T19:33:30.4802998Z   overwrite-settings: true
+2026-05-16T19:33:30.4803891Z   job-status: success
+2026-05-16T19:33:30.4804943Z   token: ***
+2026-05-16T19:33:30.4805662Z env:
+2026-05-16T19:33:30.4806446Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:30.4807505Z   BUILD_TYPE: release
+2026-05-16T19:33:30.4808337Z   CREATE_RELEASE: yes
+2026-05-16T19:33:30.4809280Z   IS_PRERELEASE: yes
+2026-05-16T19:33:30.4810092Z   APP_NAME: PakDB
+2026-05-16T19:33:30.4810868Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:30.4811716Z ##[endgroup]
+2026-05-16T19:33:30.6449297Z ##[group]Installed distributions
+2026-05-16T19:33:30.6799175Z (node:2062) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-05-16T19:33:30.6808333Z Resolved Java 17.0.19+10 from tool-cache
+2026-05-16T19:33:30.6809425Z Setting Java 17.0.19+10 as the default
+2026-05-16T19:33:30.6810468Z Creating toolchains.xml for JDK version 17 from temurin
+2026-05-16T19:33:30.6817702Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-05-16T19:33:30.6946173Z Writing to /home/runner/.m2/toolchains.xml
+2026-05-16T19:33:30.6954949Z 
+2026-05-16T19:33:30.6979285Z Java configuration:
+2026-05-16T19:33:30.7001815Z   Distribution: temurin
+2026-05-16T19:33:30.7002579Z   Version: 17.0.19+10
+2026-05-16T19:33:30.7019514Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:30.7046100Z 
+2026-05-16T19:33:30.7056541Z ##[endgroup]
+2026-05-16T19:33:30.7078651Z Creating settings.xml with server-id: github
+2026-05-16T19:33:30.7079414Z Writing to /home/runner/.m2/settings.xml
+2026-05-16T19:33:30.9349939Z Cache hit for: setup-java-Linux-x64-gradle-973f13f3a6447aff4f4226afb2165c5cd5dd7bfc167f7e238c1ffe5cb49bed81
+2026-05-16T19:33:30.9446705Z (node:2062) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-05-16T19:33:32.1139545Z Received 88080384 of 549392833 (16.0%), 83.7 MBs/sec
+2026-05-16T19:33:33.1131966Z Received 268435456 of 549392833 (48.9%), 127.7 MBs/sec
+2026-05-16T19:33:34.1135930Z Received 473956352 of 549392833 (86.3%), 150.5 MBs/sec
+2026-05-16T19:33:34.5882429Z Received 549392833 of 549392833 (100.0%), 150.6 MBs/sec
+2026-05-16T19:33:34.5883372Z Cache Size: ~524 MB (549392833 B)
+2026-05-16T19:33:34.5923216Z [command]/usr/bin/tar -xf /home/runner/work/_temp/fda1e311-fbe6-4ce7-aad1-df708b52b93e/cache.tzst -P -C /home/runner/work/fusionspy/fusionspy --use-compress-program unzstd
+2026-05-16T19:33:37.7125953Z Cache restored successfully
+2026-05-16T19:33:37.7387033Z Cache restored from key: setup-java-Linux-x64-gradle-973f13f3a6447aff4f4226afb2165c5cd5dd7bfc167f7e238c1ffe5cb49bed81
+2026-05-16T19:33:37.8423787Z ##[group]Run chmod +x gradlew
+2026-05-16T19:33:37.8424207Z [36;1mchmod +x gradlew[0m
+2026-05-16T19:33:37.8475187Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:37.8475430Z env:
+2026-05-16T19:33:37.8475645Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:37.8475931Z   BUILD_TYPE: release
+2026-05-16T19:33:37.8476132Z   CREATE_RELEASE: yes
+2026-05-16T19:33:37.8476333Z   IS_PRERELEASE: yes
+2026-05-16T19:33:37.8476796Z   APP_NAME: PakDB
+2026-05-16T19:33:37.8477077Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:37.8477515Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:37.8478270Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:37.8479288Z ##[endgroup]
+2026-05-16T19:33:38.0925548Z ##[group]Run echo "Checking signing configuration..."
+2026-05-16T19:33:38.0926175Z [36;1mecho "Checking signing configuration..."[0m
+2026-05-16T19:33:38.0926620Z [36;1m[0m
+2026-05-16T19:33:38.0927284Z [36;1mif [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then[0m
+2026-05-16T19:33:38.0928015Z [36;1m  echo "Using GitHub secrets for signing..."[0m
+2026-05-16T19:33:38.0928373Z [36;1m  echo "$KEYSTORE_BASE64" | base64 -d > release.keystore[0m
+2026-05-16T19:33:38.0928983Z [36;1m[0m
+2026-05-16T19:33:38.0929272Z [36;1m  echo "storeFile=../release.keystore" > keystore.properties[0m
+2026-05-16T19:33:38.0929717Z [36;1m  echo "storePassword=$KEYSTORE_PASSWORD" >> keystore.properties[0m
+2026-05-16T19:33:38.0930140Z [36;1m  echo "keyAlias=$KEY_ALIAS" >> keystore.properties[0m
+2026-05-16T19:33:38.0930526Z [36;1m  echo "keyPassword=$KEY_PASSWORD" >> keystore.properties[0m
+2026-05-16T19:33:38.0930862Z [36;1m[0m
+2026-05-16T19:33:38.0931120Z [36;1m  echo "Signing configured from GitHub secrets"[0m
+2026-05-16T19:33:38.0931401Z [36;1m[0m
+2026-05-16T19:33:38.0931688Z [36;1melif [ -f "release.keystore" ] && [ -f "keystore.properties" ]; then[0m
+2026-05-16T19:33:38.0932119Z [36;1m  echo "Using local keystore files from repository..."[0m
+2026-05-16T19:33:38.0932511Z [36;1m  echo "Local keystore found and will be used"[0m
+2026-05-16T19:33:38.0932804Z [36;1m[0m
+2026-05-16T19:33:38.0932973Z [36;1melse[0m
+2026-05-16T19:33:38.0933199Z [36;1m  echo "No keystore configuration found"[0m
+2026-05-16T19:33:38.0933499Z [36;1m  echo "Release build will be UNSIGNED"[0m
+2026-05-16T19:33:38.0933791Z [36;1m  rm -f keystore.properties[0m
+2026-05-16T19:33:38.0934039Z [36;1mfi[0m
+2026-05-16T19:33:38.0934206Z [36;1m[0m
+2026-05-16T19:33:38.0934491Z [36;1mif [ -f "keystore.properties" ] && [ -f "release.keystore" ]; then[0m
+2026-05-16T19:33:38.0934889Z [36;1m  echo "SIGNING_ENABLED=true" >> $GITHUB_ENV[0m
+2026-05-16T19:33:38.0935234Z [36;1m  echo "SIGNING_STATUS=signed" >> $GITHUB_OUTPUT[0m
+2026-05-16T19:33:38.0935554Z [36;1m  echo "✅ Signing is CONFIGURED"[0m
+2026-05-16T19:33:38.0935821Z [36;1melse[0m
+2026-05-16T19:33:38.0936057Z [36;1m  echo "SIGNING_ENABLED=false" >> $GITHUB_ENV[0m
+2026-05-16T19:33:38.0936395Z [36;1m  echo "SIGNING_STATUS=unsigned" >> $GITHUB_OUTPUT[0m
+2026-05-16T19:33:38.0937014Z [36;1m  echo "⚠️ Signing is NOT configured - release will be UNSIGNED"[0m
+2026-05-16T19:33:38.0937389Z [36;1mfi[0m
+2026-05-16T19:33:38.0972111Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:38.0972354Z env:
+2026-05-16T19:33:38.0972560Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:38.0972831Z   BUILD_TYPE: release
+2026-05-16T19:33:38.0973046Z   CREATE_RELEASE: yes
+2026-05-16T19:33:38.0973242Z   IS_PRERELEASE: yes
+2026-05-16T19:33:38.0973440Z   APP_NAME: PakDB
+2026-05-16T19:33:38.0973635Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:38.0973964Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:38.0974436Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:38.0974806Z   KEYSTORE_BASE64: 
+2026-05-16T19:33:38.0975013Z   KEYSTORE_PASSWORD: 
+2026-05-16T19:33:38.0975205Z   KEY_ALIAS: 
+2026-05-16T19:33:38.0975393Z   KEY_PASSWORD: 
+2026-05-16T19:33:38.0975589Z ##[endgroup]
+2026-05-16T19:33:38.1426149Z Checking signing configuration...
+2026-05-16T19:33:38.1426874Z Using local keystore files from repository...
+2026-05-16T19:33:38.1427600Z Local keystore found and will be used
+2026-05-16T19:33:38.1428405Z ✅ Signing is CONFIGURED
+2026-05-16T19:33:38.3022986Z ##[group]Run case "$BUILD_TYPE" in
+2026-05-16T19:33:38.3023486Z [36;1mcase "$BUILD_TYPE" in[0m
+2026-05-16T19:33:38.3023921Z [36;1m  debug) ./gradlew assembleDebug ;;[0m
+2026-05-16T19:33:38.3024427Z [36;1m  release) ./gradlew assembleRelease ;;[0m
+2026-05-16T19:33:38.3024983Z [36;1m  both) ./gradlew assembleDebug assembleRelease ;;[0m
+2026-05-16T19:33:38.3025453Z [36;1mesac[0m
+2026-05-16T19:33:38.3153890Z shell: /usr/bin/bash -e {0}
+2026-05-16T19:33:38.3154264Z env:
+2026-05-16T19:33:38.3154578Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-05-16T19:33:38.3155021Z   BUILD_TYPE: release
+2026-05-16T19:33:38.3155364Z   CREATE_RELEASE: yes
+2026-05-16T19:33:38.3155672Z   IS_PRERELEASE: yes
+2026-05-16T19:33:38.3155993Z   APP_NAME: PakDB
+2026-05-16T19:33:38.3156323Z   AUTO_HIDE_ICON: no
+2026-05-16T19:33:38.3156836Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:38.3157699Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-05-16T19:33:38.3158326Z   SIGNING_ENABLED: true
+2026-05-16T19:33:38.3159155Z ##[endgroup]
+2026-05-16T19:33:42.4950313Z 
+2026-05-16T19:33:42.4967032Z Welcome to Gradle 8.2!
+2026-05-16T19:33:42.4967663Z 
+2026-05-16T19:33:42.4968111Z Here are the highlights of this release:
+2026-05-16T19:33:42.4969368Z  - Kotlin DSL: new reference documentation, assignment syntax by default
+2026-05-16T19:33:42.4970359Z  - Kotlin DSL is now the default with Gradle init
+2026-05-16T19:33:42.4981726Z  - Improved suggestions to resolve errors in console output
+2026-05-16T19:33:42.4982435Z 
+2026-05-16T19:33:42.5013139Z For more details see https://docs.gradle.org/8.2/release-notes.html
+2026-05-16T19:33:42.5014059Z 
+2026-05-16T19:33:42.8869992Z Starting a Gradle Daemon (subsequent builds will be faster)
+2026-05-16T19:33:58.0899813Z > Task :app:preBuild UP-TO-DATE
+2026-05-16T19:33:58.0917517Z > Task :app:preReleaseBuild UP-TO-DATE
+2026-05-16T19:33:58.2854336Z > Task :app:mergeReleaseJniLibFolders
+2026-05-16T19:33:59.0900137Z > Task :app:mergeReleaseNativeLibs
+2026-05-16T19:33:59.0962325Z > Task :app:buildKotlinToolingMetadata
+2026-05-16T19:33:59.3880958Z 
+2026-05-16T19:33:59.3885168Z > Task :app:stripReleaseDebugSymbols
+2026-05-16T19:33:59.3919396Z Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
+2026-05-16T19:33:59.4848309Z 
+2026-05-16T19:33:59.4880407Z > Task :app:extractReleaseNativeSymbolTables
+2026-05-16T19:33:59.4911987Z > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+2026-05-16T19:33:59.4932521Z > Task :app:checkReleaseDuplicateClasses
+2026-05-16T19:33:59.4979219Z > Task :app:generateReleaseBuildConfig
+2026-05-16T19:33:59.6857569Z > Task :app:generateReleaseResValues
+2026-05-16T19:33:59.7864110Z > Task :app:checkReleaseAarMetadata
+2026-05-16T19:33:59.7885455Z > Task :app:mapReleaseSourceSetPaths
+2026-05-16T19:33:59.7909151Z > Task :app:generateReleaseResources
+2026-05-16T19:34:01.5847669Z > Task :app:packageReleaseResources
+2026-05-16T19:34:03.2090704Z > Task :app:parseReleaseLocalResources
+2026-05-16T19:34:03.2092559Z > Task :app:createReleaseCompatibleScreenManifests
+2026-05-16T19:34:03.2093666Z > Task :app:extractDeepLinksRelease
+2026-05-16T19:34:03.6053983Z > Task :app:mergeReleaseResources
+2026-05-16T19:34:03.9960417Z > Task :app:processReleaseMainManifest
+2026-05-16T19:34:04.0895930Z > Task :app:processReleaseManifest
+2026-05-16T19:34:04.0925060Z > Task :app:javaPreCompileRelease
+2026-05-16T19:34:04.2861122Z > Task :app:mergeReleaseArtProfile
+2026-05-16T19:34:04.3899964Z > Task :app:extractProguardFiles
+2026-05-16T19:34:04.3929188Z > Task :app:processReleaseManifestForPackage
+2026-05-16T19:34:04.6153079Z > Task :app:mergeReleaseShaders
+2026-05-16T19:34:04.6179079Z > Task :app:compileReleaseShaders NO-SOURCE
+2026-05-16T19:34:04.6480692Z > Task :app:generateReleaseAssets UP-TO-DATE
+2026-05-16T19:34:04.7020559Z > Task :app:mergeReleaseAssets
+2026-05-16T19:34:04.7234429Z > Task :app:compressReleaseAssets
+2026-05-16T19:34:04.7450422Z > Task :app:processApplicationManifestReleaseForBundle
+2026-05-16T19:34:04.7859208Z > Task :app:collectReleaseDependencies
+2026-05-16T19:34:04.9851395Z > Task :app:sdkReleaseDependencyData
+2026-05-16T19:34:04.9869234Z > Task :app:validateSigningRelease
+2026-05-16T19:34:04.9888913Z > Task :app:writeReleaseAppMetadata
+2026-05-16T19:34:04.9909127Z > Task :app:writeReleaseSigningConfigVersions
+2026-05-16T19:34:05.2899714Z > Task :app:processReleaseResources
+2026-05-16T19:34:06.7848379Z > Task :app:bundleReleaseResources
+2026-05-16T19:34:24.3869560Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/ContactsExecutor.kt:118:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.3870649Z 
+2026-05-16T19:34:24.3893992Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/ContactsExecutor.kt:156:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.3897309Z > Task :app:compileReleaseKotlin FAILED
+2026-05-16T19:34:24.3931353Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/ContactsExecutor.kt:159:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.3971802Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/SmsExecutor.kt:93:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.3976962Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/SmsExecutor.kt:128:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.4018199Z e: file:///home/runner/work/fusionspy/fusionspy/app/src/main/java/com/fasonbot/app/action/SmsExecutor.kt:131:13 Unresolved reference: WebSocketSender
+2026-05-16T19:34:24.4868214Z 
+2026-05-16T19:34:24.4868982Z 33 actionable tasks: 33 executed
+2026-05-16T19:34:24.4879491Z FAILURE: Build failed with an exception.
+2026-05-16T19:34:24.4917160Z 
+2026-05-16T19:34:24.4957651Z * What went wrong:
+2026-05-16T19:34:24.4979244Z Execution failed for task ':app:compileReleaseKotlin'.
+2026-05-16T19:34:24.4990252Z > A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+2026-05-16T19:34:24.5009110Z    > Compilation error. See log for more details
+2026-05-16T19:34:24.5026581Z 
+2026-05-16T19:34:24.5042097Z * Try:
+2026-05-16T19:34:24.5067763Z > Run with --stacktrace option to get the stack trace.
+2026-05-16T19:34:24.5099145Z > Run with --info or --debug option to get more log output.
+2026-05-16T19:34:24.5103954Z > Run with --scan to get full insights.
+2026-05-16T19:34:24.5126488Z > Get more help at https://help.gradle.org.
+2026-05-16T19:34:24.5158951Z 
+2026-05-16T19:34:24.5159291Z BUILD FAILED in 43s
+2026-05-16T19:34:24.9302181Z ##[error]Process completed with exit code 1.
+2026-05-16T19:34:24.9422168Z Post job cleanup.
+2026-05-16T19:34:25.0789367Z (node:2259) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-05-16T19:34:25.0790592Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-05-16T19:34:25.0968974Z Post job cleanup.
+2026-05-16T19:34:25.2137644Z [command]/usr/bin/git version
+2026-05-16T19:34:25.2207583Z git version 2.54.0
+2026-05-16T19:34:25.2329644Z Temporarily overriding HOME='/home/runner/work/_temp/ba769e18-5694-4ccd-bb83-ef01349bf2d5' before making global git config changes
+2026-05-16T19:34:25.2331204Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-16T19:34:25.2349425Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/fusionspy/fusionspy
+2026-05-16T19:34:25.2386144Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-05-16T19:34:25.2420114Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-05-16T19:34:25.2755569Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-16T19:34:25.2800514Z http.https://github.com/.extraheader
+2026-05-16T19:34:25.2855809Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-05-16T19:34:25.2914048Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-05-16T19:34:25.3152089Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-16T19:34:25.3187697Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-05-16T19:34:25.3571022Z Cleaning up orphan processes
+2026-05-16T19:34:25.3853798Z Terminate orphan process: pid (2115) (java)
+2026-05-16T19:34:25.3887244Z Terminate orphan process: pid (2201) (java)
+2026-05-16T19:34:25.3901967Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

