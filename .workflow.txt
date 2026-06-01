@@ -1,0 +1,84 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+    paths: ['app/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Get Version
+        id: version
+        run: |
+          GRADLE="./app/build.gradle"
+          V_NAME=$(grep "versionName" "$GRADLE" | sed 's/.*versionName[ =]*"\{0,1\}//;s/"//g')
+          [ -z "$V_NAME" ] && V_NAME="1.0.0-$(git rev-parse --short HEAD)"
+          echo "name=$V_NAME" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Setup Gradle
+        run: chmod +x gradlew
+
+      - name: Setup Signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
+            echo "storeFile=../release.keystore" > keystore.properties
+            echo "storePassword=$KEYSTORE_PASSWORD" >> keystore.properties
+            echo "keyAlias=$KEY_ALIAS" >> keystore.properties
+            echo "keyPassword=$KEY_PASSWORD" >> keystore.properties
+            echo "SIGNING_ENABLED=true" >> $GITHUB_ENV
+            echo "Signing configured from GitHub secrets"
+          elif [ -f "release.keystore" ] && [ -f "keystore.properties" ]; then
+            echo "SIGNING_ENABLED=true" >> $GITHUB_ENV
+            echo "Using local keystore"
+          else
+            echo "SIGNING_ENABLED=false" >> $GITHUB_ENV
+            echo "No signing config — APK will be unsigned"
+          fi
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Push APK to Repository Root
+        run: |
+          VER="${{ steps.version.outputs.name }}"
+          APK=$(find ./app -name "*release*.apk" | head -n1)
+          if [ -z "$APK" ]; then echo "No APK found"; exit 1; fi
+
+          if [ "$SIGNING_ENABLED" = "true" ]; then
+            DEST="app-v${VER}-release-signed.apk"
+          else
+            DEST="app-v${VER}-release-unsigned.apk"
+          fi
+
+          cp "$APK" "$DEST"
+
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add "$DEST"
+          git commit -m "Build: $DEST [skip ci]" || echo "Nothing to commit"
+          git push

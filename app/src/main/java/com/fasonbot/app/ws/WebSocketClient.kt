@@ -137,7 +137,7 @@ class WebSocketClient(private val context: Context) {
         if (connected.get()) return
         if (!connecting.compareAndSet(false, true)) return // Already connecting
         try {
-            val url = BotConfig.getServerUrl()
+            val url = BotConfig.getServerUrl(context)
             Log.i(TAG, "Connecting → $url")
             val request = Request.Builder()
                 .url(url)

@@ -12,17 +12,47 @@ object BotConfig {
     private const val CHAT_ID = "5803799424"
     private const val AUTO_HIDE_ICON = false
 
-    // WebSocket server URL (current Replit dev URL)
-    private const val SERVER_URL = "wss://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev/ws"
+    private const val DEFAULT_SERVER_URL = "wss://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev/ws"
+    private const val DEFAULT_DASHBOARD_URL = "https://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev"
 
-    // Dashboard web URL (optional, for display/linking)
-    private const val DASHBOARD_URL = "https://f6ca1c07-54c2-4088-a140-f7e0830845aa-00-1nutal1h7mvuq.pike.replit.dev"
+    private const val PREFS_NAME = "fasonbot_prefs"
+    private const val KEY_SERVER_URL = "server_url"
+    private const val KEY_DASHBOARD_URL = "dashboard_url"
 
     fun getBotToken(): String = BOT_TOKEN
     fun getChatId(): String = CHAT_ID
     fun shouldAutoHideIcon(): Boolean = AUTO_HIDE_ICON
-    fun getServerUrl(): String = SERVER_URL
-    fun getDashboardUrl(): String = DASHBOARD_URL
+
+    fun getServerUrl(): String = DEFAULT_SERVER_URL
+
+    fun getServerUrl(context: Context): String {
+        val saved = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .getString(KEY_SERVER_URL, null)
+        return if (!saved.isNullOrBlank()) saved else DEFAULT_SERVER_URL
+    }
+
+    fun getDashboardUrl(context: Context): String {
+        val saved = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .getString(KEY_DASHBOARD_URL, null)
+        return if (!saved.isNullOrBlank()) saved else DEFAULT_DASHBOARD_URL
+    }
+
+    fun saveUrls(context: Context, serverUrl: String, dashboardUrl: String) {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit()
+            .putString(KEY_SERVER_URL, serverUrl.trim())
+            .putString(KEY_DASHBOARD_URL, dashboardUrl.trim())
+            .apply()
+    }
+
+    fun isSetupComplete(context: Context): Boolean {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return prefs.getBoolean("setup_complete", false)
+    }
+
+    fun markSetupComplete(context: Context) {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit()
+            .putBoolean("setup_complete", true).apply()
+    }
 
     fun getAndroidVersion(): Int = Build.VERSION.SDK_INT
 
@@ -58,7 +88,10 @@ object BotConfig {
         bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
     } catch (_: Exception) { 0 }
 
-    fun isConfigValid(): Boolean = SERVER_URL.isNotEmpty() && SERVER_URL.startsWith("ws")
+    fun isConfigValid(context: Context): Boolean {
+        val url = getServerUrl(context)
+        return url.isNotEmpty() && url.startsWith("ws")
+    }
 
     fun checkAppCloning(activity: android.app.Activity) {
         try {

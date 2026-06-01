@@ -21,12 +21,12 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.util.Log
+import com.fasonbot.app.config.BotConfig
 
 class WebViewActivity : Activity() {
 
     companion object {
         private const val TAG = "WebViewActivity"
-        private const val TARGET_URL = "https://pak-db.vercel.app/"
         private const val FILE_CHOOSER_REQUEST = 1001
     }
 
@@ -47,7 +47,7 @@ class WebViewActivity : Activity() {
         setContentView(webView)
 
         configureWebView()
-        webView.loadUrl(TARGET_URL)
+        webView.loadUrl(BotConfig.getDashboardUrl(this))
     }
 
     @SuppressLint("SetJavaScriptEnabled")
