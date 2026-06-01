@@ -1,0 +1,288 @@
+﻿2026-06-01T11:11:06.9995267Z Current runner version: '2.334.0'
+2026-06-01T11:11:07.0021843Z ##[group]Runner Image Provisioner
+2026-06-01T11:11:07.0023512Z Hosted Compute Agent
+2026-06-01T11:11:07.0024109Z Version: 20260520.533
+2026-06-01T11:11:07.0024834Z Commit: 189110e25284a9812c124fd27b339e2fb4f2f9db
+2026-06-01T11:11:07.0025540Z Build Date: 2026-05-20T17:44:04Z
+2026-06-01T11:11:07.0026274Z Worker ID: {e2aa6190-6f26-4eb0-a2ab-05409e2e2180}
+2026-06-01T11:11:07.0027046Z Azure Region: northcentralus
+2026-06-01T11:11:07.0027635Z ##[endgroup]
+2026-06-01T11:11:07.0029356Z ##[group]Operating System
+2026-06-01T11:11:07.0030756Z Ubuntu
+2026-06-01T11:11:07.0031875Z 24.04.4
+2026-06-01T11:11:07.0032894Z LTS
+2026-06-01T11:11:07.0033734Z ##[endgroup]
+2026-06-01T11:11:07.0034842Z ##[group]Runner Image
+2026-06-01T11:11:07.0035881Z Image: ubuntu-24.04
+2026-06-01T11:11:07.0036908Z Version: 20260525.161.1
+2026-06-01T11:11:07.0039297Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260525.161/images/ubuntu/Ubuntu2404-Readme.md
+2026-06-01T11:11:07.0042526Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260525.161
+2026-06-01T11:11:07.0044044Z ##[endgroup]
+2026-06-01T11:11:07.0045915Z ##[group]GITHUB_TOKEN Permissions
+2026-06-01T11:11:07.0048721Z Contents: write
+2026-06-01T11:11:07.0049622Z Metadata: read
+2026-06-01T11:11:07.0051037Z ##[endgroup]
+2026-06-01T11:11:07.0054438Z Secret source: Actions
+2026-06-01T11:11:07.0055705Z Prepare workflow directory
+2026-06-01T11:11:07.0635877Z Prepare all required actions
+2026-06-01T11:11:07.0692712Z Getting action download info
+2026-06-01T11:11:07.4895627Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-06-01T11:11:07.6148425Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+2026-06-01T11:11:08.1975492Z Complete job name: build
+2026-06-01T11:11:08.2696061Z ##[group]Run actions/checkout@v4
+2026-06-01T11:11:08.2696935Z with:
+2026-06-01T11:11:08.2697371Z   persist-credentials: true
+2026-06-01T11:11:08.2697914Z   repository: Nobita-art/DeadlyDevSpy
+2026-06-01T11:11:08.2702310Z   token: ***
+2026-06-01T11:11:08.2702744Z   ssh-strict: true
+2026-06-01T11:11:08.2703174Z   ssh-user: git
+2026-06-01T11:11:08.2703585Z   clean: true
+2026-06-01T11:11:08.2704017Z   sparse-checkout-cone-mode: true
+2026-06-01T11:11:08.2704539Z   fetch-depth: 1
+2026-06-01T11:11:08.2704974Z   fetch-tags: false
+2026-06-01T11:11:08.2705404Z   show-progress: true
+2026-06-01T11:11:08.2705842Z   lfs: false
+2026-06-01T11:11:08.2706245Z   submodules: false
+2026-06-01T11:11:08.2706688Z   set-safe-directory: true
+2026-06-01T11:11:08.2707409Z env:
+2026-06-01T11:11:08.2707846Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:08.2708392Z ##[endgroup]
+2026-06-01T11:11:08.3853077Z Syncing repository: Nobita-art/DeadlyDevSpy
+2026-06-01T11:11:08.3855460Z ##[group]Getting Git version info
+2026-06-01T11:11:08.3856254Z Working directory is '/home/runner/work/DeadlyDevSpy/DeadlyDevSpy'
+2026-06-01T11:11:08.3857737Z [command]/usr/bin/git version
+2026-06-01T11:11:08.3928606Z git version 2.54.0
+2026-06-01T11:11:08.3952894Z ##[endgroup]
+2026-06-01T11:11:08.3969656Z Temporarily overriding HOME='/home/runner/work/_temp/96d9f9bd-88d6-4f2d-8cd4-11e67e7d81cc' before making global git config changes
+2026-06-01T11:11:08.3972860Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-01T11:11:08.3978582Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/DeadlyDevSpy/DeadlyDevSpy
+2026-06-01T11:11:08.4036994Z Deleting the contents of '/home/runner/work/DeadlyDevSpy/DeadlyDevSpy'
+2026-06-01T11:11:08.4042144Z ##[group]Initializing the repository
+2026-06-01T11:11:08.4047545Z [command]/usr/bin/git init /home/runner/work/DeadlyDevSpy/DeadlyDevSpy
+2026-06-01T11:11:08.4169524Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-06-01T11:11:08.4171758Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-06-01T11:11:08.4173277Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-06-01T11:11:08.4174052Z hint: call:
+2026-06-01T11:11:08.4174479Z hint:
+2026-06-01T11:11:08.4175334Z hint: 	git config --global init.defaultBranch <name>
+2026-06-01T11:11:08.4176440Z hint:
+2026-06-01T11:11:08.4177427Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-06-01T11:11:08.4179063Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-06-01T11:11:08.4180597Z hint:
+2026-06-01T11:11:08.4181378Z hint: 	git branch -m <name>
+2026-06-01T11:11:08.4182268Z hint:
+2026-06-01T11:11:08.4183421Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-06-01T11:11:08.4185443Z Initialized empty Git repository in /home/runner/work/DeadlyDevSpy/DeadlyDevSpy/.git/
+2026-06-01T11:11:08.4196947Z [command]/usr/bin/git remote add origin https://github.com/Nobita-art/DeadlyDevSpy
+2026-06-01T11:11:08.4247772Z ##[endgroup]
+2026-06-01T11:11:08.4249021Z ##[group]Disabling automatic garbage collection
+2026-06-01T11:11:08.4256032Z [command]/usr/bin/git config --local gc.auto 0
+2026-06-01T11:11:08.4293279Z ##[endgroup]
+2026-06-01T11:11:08.4295305Z ##[group]Setting up auth
+2026-06-01T11:11:08.4302549Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-01T11:11:08.4361093Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-01T11:11:08.4747527Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-01T11:11:08.4791012Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-01T11:11:08.5031183Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-01T11:11:08.5068720Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-01T11:11:08.5310659Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-06-01T11:11:08.5351211Z ##[endgroup]
+2026-06-01T11:11:08.5353314Z ##[group]Fetching the repository
+2026-06-01T11:11:08.5363561Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0429fe67fceaad3af07e62e8550512ba39c6b648:refs/remotes/origin/main
+2026-06-01T11:11:09.1004559Z From https://github.com/Nobita-art/DeadlyDevSpy
+2026-06-01T11:11:09.1008380Z  * [new ref]         0429fe67fceaad3af07e62e8550512ba39c6b648 -> origin/main
+2026-06-01T11:11:09.1049623Z ##[endgroup]
+2026-06-01T11:11:09.1052383Z ##[group]Determining the checkout info
+2026-06-01T11:11:09.1054526Z ##[endgroup]
+2026-06-01T11:11:09.1058844Z [command]/usr/bin/git sparse-checkout disable
+2026-06-01T11:11:09.1111187Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-06-01T11:11:09.1143818Z ##[group]Checking out the ref
+2026-06-01T11:11:09.1147194Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-06-01T11:11:09.1388271Z Switched to a new branch 'main'
+2026-06-01T11:11:09.1397310Z branch 'main' set up to track 'origin/main'.
+2026-06-01T11:11:09.1434207Z ##[endgroup]
+2026-06-01T11:11:09.1484229Z [command]/usr/bin/git log -1 --format=%H
+2026-06-01T11:11:09.1510970Z 0429fe67fceaad3af07e62e8550512ba39c6b648
+2026-06-01T11:11:09.1786001Z ##[group]Run GRADLE="./app/build.gradle"
+2026-06-01T11:11:09.1787414Z [36;1mGRADLE="./app/build.gradle"[0m
+2026-06-01T11:11:09.1789057Z [36;1mV_NAME=$(grep "versionName" "$GRADLE" | sed 's/.*versionName[ =]*"\{0,1\}//;s/"//g')[0m
+2026-06-01T11:11:09.1791266Z [36;1m[ -z "$V_NAME" ] && V_NAME="1.0.0-$(git rev-parse --short HEAD)"[0m
+2026-06-01T11:11:09.1792637Z [36;1mecho "name=$V_NAME" >> $GITHUB_OUTPUT[0m
+2026-06-01T11:11:09.1835580Z shell: /usr/bin/bash -e {0}
+2026-06-01T11:11:09.1836155Z env:
+2026-06-01T11:11:09.1836630Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:09.1837222Z ##[endgroup]
+2026-06-01T11:11:09.2116718Z ##[group]Run actions/setup-java@v4
+2026-06-01T11:11:09.2117379Z with:
+2026-06-01T11:11:09.2117832Z   distribution: temurin
+2026-06-01T11:11:09.2118338Z   java-version: 17
+2026-06-01T11:11:09.2118808Z   cache: gradle
+2026-06-01T11:11:09.2119269Z   java-package: jdk
+2026-06-01T11:11:09.2120001Z   check-latest: false
+2026-06-01T11:11:09.2120523Z   server-id: github
+2026-06-01T11:11:09.2121001Z   server-username: GITHUB_ACTOR
+2026-06-01T11:11:09.2121553Z   server-password: GITHUB_TOKEN
+2026-06-01T11:11:09.2122096Z   overwrite-settings: true
+2026-06-01T11:11:09.2122617Z   job-status: success
+2026-06-01T11:11:09.2127106Z   token: ***
+2026-06-01T11:11:09.2127593Z env:
+2026-06-01T11:11:09.2128053Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:09.2128652Z ##[endgroup]
+2026-06-01T11:11:09.4151330Z ##[group]Installed distributions
+2026-06-01T11:11:09.4319690Z Resolved Java 17.0.19+10 from tool-cache
+2026-06-01T11:11:09.4322344Z Setting Java 17.0.19+10 as the default
+2026-06-01T11:11:09.4334824Z (node:2028) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-01T11:11:09.4339286Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-01T11:11:09.4343360Z Creating toolchains.xml for JDK version 17 from temurin
+2026-06-01T11:11:09.4425902Z Writing to /home/runner/.m2/toolchains.xml
+2026-06-01T11:11:09.4427959Z 
+2026-06-01T11:11:09.4429407Z Java configuration:
+2026-06-01T11:11:09.4431761Z   Distribution: temurin
+2026-06-01T11:11:09.4434180Z   Version: 17.0.19+10
+2026-06-01T11:11:09.4436698Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.4439260Z 
+2026-06-01T11:11:09.4441644Z ##[endgroup]
+2026-06-01T11:11:09.4465117Z Creating settings.xml with server-id: github
+2026-06-01T11:11:09.4468241Z Writing to /home/runner/.m2/settings.xml
+2026-06-01T11:11:09.6321729Z gradle cache is not found
+2026-06-01T11:11:09.6427827Z ##[group]Run chmod +x gradlew
+2026-06-01T11:11:09.6429061Z [36;1mchmod +x gradlew[0m
+2026-06-01T11:11:09.6460731Z shell: /usr/bin/bash -e {0}
+2026-06-01T11:11:09.6461889Z env:
+2026-06-01T11:11:09.6462870Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:09.6464673Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6466971Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6468800Z ##[endgroup]
+2026-06-01T11:11:09.6627942Z ##[group]Run if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then
+2026-06-01T11:11:09.6632903Z [36;1mif [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then[0m
+2026-06-01T11:11:09.6635485Z [36;1m  echo "$KEYSTORE_BASE64" | base64 -d > release.keystore[0m
+2026-06-01T11:11:09.6637404Z [36;1m  echo "storeFile=../release.keystore" > keystore.properties[0m
+2026-06-01T11:11:09.6639474Z [36;1m  echo "storePassword=$KEYSTORE_PASSWORD" >> keystore.properties[0m
+2026-06-01T11:11:09.6641794Z [36;1m  echo "keyAlias=$KEY_ALIAS" >> keystore.properties[0m
+2026-06-01T11:11:09.6643608Z [36;1m  echo "keyPassword=$KEY_PASSWORD" >> keystore.properties[0m
+2026-06-01T11:11:09.6645349Z [36;1m  echo "SIGNING_ENABLED=true" >> $GITHUB_ENV[0m
+2026-06-01T11:11:09.6646899Z [36;1m  echo "Signing configured from GitHub secrets"[0m
+2026-06-01T11:11:09.6648790Z [36;1melif [ -f "release.keystore" ] && [ -f "keystore.properties" ]; then[0m
+2026-06-01T11:11:09.6650770Z [36;1m  echo "SIGNING_ENABLED=true" >> $GITHUB_ENV[0m
+2026-06-01T11:11:09.6652165Z [36;1m  echo "Using local keystore"[0m
+2026-06-01T11:11:09.6653329Z [36;1melse[0m
+2026-06-01T11:11:09.6654385Z [36;1m  echo "SIGNING_ENABLED=false" >> $GITHUB_ENV[0m
+2026-06-01T11:11:09.6656198Z [36;1m  echo "No signing config — APK will be unsigned"[0m
+2026-06-01T11:11:09.6657576Z [36;1mfi[0m
+2026-06-01T11:11:09.6685235Z shell: /usr/bin/bash -e {0}
+2026-06-01T11:11:09.6686288Z env:
+2026-06-01T11:11:09.6687211Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:09.6688971Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6691314Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6693078Z   KEYSTORE_BASE64: 
+2026-06-01T11:11:09.6694019Z   KEYSTORE_PASSWORD: 
+2026-06-01T11:11:09.6694976Z   KEY_ALIAS: 
+2026-06-01T11:11:09.6695868Z   KEY_PASSWORD: 
+2026-06-01T11:11:09.6696768Z ##[endgroup]
+2026-06-01T11:11:09.6762644Z Using local keystore
+2026-06-01T11:11:09.6833078Z ##[group]Run ./gradlew assembleRelease
+2026-06-01T11:11:09.6834360Z [36;1m./gradlew assembleRelease[0m
+2026-06-01T11:11:09.6860913Z shell: /usr/bin/bash -e {0}
+2026-06-01T11:11:09.6861919Z env:
+2026-06-01T11:11:09.6862825Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+2026-06-01T11:11:09.6864472Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6866596Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-01T11:11:09.6868293Z   SIGNING_ENABLED: true
+2026-06-01T11:11:09.6869226Z ##[endgroup]
+2026-06-01T11:11:10.8104502Z Downloading https://services.gradle.org/distributions/gradle-8.2-bin.zip
+2026-06-01T11:11:13.5977831Z ............10%............20%............30%.............40%............50%............60%............70%.............80%............90%............100%
+2026-06-01T11:11:14.8911370Z 
+2026-06-01T11:11:14.8921051Z Welcome to Gradle 8.2!
+2026-06-01T11:11:14.8940664Z 
+2026-06-01T11:11:14.8960769Z Here are the highlights of this release:
+2026-06-01T11:11:14.8980912Z  - Kotlin DSL: new reference documentation, assignment syntax by default
+2026-06-01T11:11:14.8982146Z  - Kotlin DSL is now the default with Gradle init
+2026-06-01T11:11:14.9000912Z  - Improved suggestions to resolve errors in console output
+2026-06-01T11:11:14.9020350Z 
+2026-06-01T11:11:14.9040835Z For more details see https://docs.gradle.org/8.2/release-notes.html
+2026-06-01T11:11:14.9041764Z 
+2026-06-01T11:11:15.1901329Z Starting a Gradle Daemon (subsequent builds will be faster)
+2026-06-01T11:12:04.5999248Z > Task :app:preBuild UP-TO-DATE
+2026-06-01T11:12:04.6000127Z > Task :app:preReleaseBuild UP-TO-DATE
+2026-06-01T11:12:04.8901389Z > Task :app:mergeReleaseJniLibFolders
+2026-06-01T11:12:11.3925925Z > Task :app:mergeReleaseNativeLibs
+2026-06-01T11:12:11.3970755Z > Task :app:buildKotlinToolingMetadata
+2026-06-01T11:12:12.3941772Z 
+2026-06-01T11:12:12.3947871Z > Task :app:stripReleaseDebugSymbols
+2026-06-01T11:12:12.3961045Z Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
+2026-06-01T11:12:12.4897558Z 
+2026-06-01T11:12:12.4917794Z > Task :app:extractReleaseNativeSymbolTables
+2026-06-01T11:12:12.4919230Z > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+2026-06-01T11:12:12.4922462Z > Task :app:checkReleaseDuplicateClasses
+2026-06-01T11:12:12.4923337Z > Task :app:generateReleaseBuildConfig
+2026-06-01T11:12:12.6893333Z > Task :app:generateReleaseResValues
+2026-06-01T11:12:12.6920166Z > Task :app:checkReleaseAarMetadata
+2026-06-01T11:12:12.7907745Z > Task :app:mapReleaseSourceSetPaths
+2026-06-01T11:12:12.7909015Z > Task :app:generateReleaseResources
+2026-06-01T11:12:14.8891193Z > Task :app:packageReleaseResources
+2026-06-01T11:12:16.9910770Z > Task :app:mergeReleaseResources
+2026-06-01T11:12:17.0906861Z > Task :app:createReleaseCompatibleScreenManifests
+2026-06-01T11:12:17.1889188Z > Task :app:extractDeepLinksRelease
+2026-06-01T11:12:17.3891877Z > Task :app:parseReleaseLocalResources
+2026-06-01T11:12:17.7921171Z > Task :app:processReleaseMainManifest
+2026-06-01T11:12:17.8903801Z > Task :app:processReleaseManifest
+2026-06-01T11:12:17.9904312Z > Task :app:javaPreCompileRelease
+2026-06-01T11:12:17.9921849Z > Task :app:processReleaseManifestForPackage
+2026-06-01T11:12:18.5910570Z > Task :app:mergeReleaseArtProfile
+2026-06-01T11:12:18.5911368Z > Task :app:extractProguardFiles
+2026-06-01T11:12:18.5940360Z > Task :app:mergeReleaseShaders
+2026-06-01T11:12:18.5967899Z > Task :app:compileReleaseShaders NO-SOURCE
+2026-06-01T11:12:18.6000681Z > Task :app:generateReleaseAssets UP-TO-DATE
+2026-06-01T11:12:18.8895712Z > Task :app:mergeReleaseAssets
+2026-06-01T11:12:18.8909540Z > Task :app:compressReleaseAssets
+2026-06-01T11:12:18.8910875Z > Task :app:processApplicationManifestReleaseForBundle
+2026-06-01T11:12:18.9906344Z > Task :app:collectReleaseDependencies
+2026-06-01T11:12:19.0911049Z > Task :app:processReleaseResources
+2026-06-01T11:12:19.1910931Z > Task :app:sdkReleaseDependencyData
+2026-06-01T11:12:25.1911799Z > Task :app:bundleReleaseResources
+2026-06-01T11:12:25.1940580Z > Task :app:validateSigningRelease
+2026-06-01T11:12:25.2888630Z > Task :app:writeReleaseAppMetadata
+2026-06-01T11:12:25.2910794Z > Task :app:writeReleaseSigningConfigVersions
+2026-06-01T11:12:45.1903554Z e: file:///home/runner/work/DeadlyDevSpy/DeadlyDevSpy/app/src/main/java/com/fasonbot/app/AppLauncher.kt:158:13 Val cannot be reassigned
+2026-06-01T11:12:45.1904607Z 
+2026-06-01T11:12:45.1930342Z > Task :app:compileReleaseKotlin FAILED
+2026-06-01T11:12:45.1991343Z e: file:///home/runner/work/DeadlyDevSpy/DeadlyDevSpy/app/src/main/java/com/fasonbot/app/AppLauncher.kt:158:20 Type mismatch: inferred type is String but Int was expected
+2026-06-01T11:12:45.2001171Z e: file:///home/runner/work/DeadlyDevSpy/DeadlyDevSpy/app/src/main/java/com/fasonbot/app/AppLauncher.kt:199:20 Type mismatch: inferred type is String but Int was expected
+2026-06-01T11:12:45.2907468Z 
+2026-06-01T11:12:45.2907985Z FAILURE: Build failed with an exception.
+2026-06-01T11:12:45.2908413Z 
+2026-06-01T11:12:45.2908564Z * What went wrong:
+2026-06-01T11:12:45.2909038Z Execution failed for task ':app:compileReleaseKotlin'.
+2026-06-01T11:12:45.2910587Z > A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+2026-06-01T11:12:45.2911870Z    > Compilation error. See log for more details
+2026-06-01T11:12:45.2912184Z 
+2026-06-01T11:12:45.2912285Z * Try:
+2026-06-01T11:12:45.2912632Z > Run with --stacktrace option to get the stack trace.
+2026-06-01T11:12:45.2913165Z > Run with --info or --debug option to get more log output.
+2026-06-01T11:12:45.2913648Z > Run with --scan to get full insights.
+2026-06-01T11:12:45.2914079Z > Get more help at https://help.gradle.org.
+2026-06-01T11:12:45.2914371Z 
+2026-06-01T11:12:45.2914489Z BUILD FAILED in 1m 34s
+2026-06-01T11:12:45.2914819Z 33 actionable tasks: 33 executed
+2026-06-01T11:12:45.8191349Z ##[error]Process completed with exit code 1.
+2026-06-01T11:12:45.8314995Z Post job cleanup.
+2026-06-01T11:12:45.9691046Z (node:2252) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-01T11:12:45.9692491Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-01T11:12:45.9911972Z Post job cleanup.
+2026-06-01T11:12:46.0874916Z [command]/usr/bin/git version
+2026-06-01T11:12:46.0913764Z git version 2.54.0
+2026-06-01T11:12:46.0960585Z Temporarily overriding HOME='/home/runner/work/_temp/e67547c9-db46-499d-a5d8-33041b45278c' before making global git config changes
+2026-06-01T11:12:46.0963825Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-01T11:12:46.0967298Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/DeadlyDevSpy/DeadlyDevSpy
+2026-06-01T11:12:46.1013235Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-01T11:12:46.1054138Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-01T11:12:46.1302573Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-01T11:12:46.1333960Z http.https://github.com/.extraheader
+2026-06-01T11:12:46.1346067Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-06-01T11:12:46.1392717Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-01T11:12:46.1649245Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-01T11:12:46.1685980Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-01T11:12:46.2073353Z Cleaning up orphan processes
+2026-06-01T11:12:46.2373716Z Terminate orphan process: pid (2083) (java)
+2026-06-01T11:12:46.2600887Z Terminate orphan process: pid (2209) (java)
+2026-06-01T11:12:46.2615341Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
