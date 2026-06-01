@@ -90,7 +90,7 @@ class AppLauncher : Activity() {
         val accent  = Color.parseColor("#00E676")
         val cardBg  = Color.parseColor("#12121A")
         val textCol = Color.parseColor("#E2E2E2")
-        val hint    = Color.parseColor("#4A4A5A")
+        val hintColor = Color.parseColor("#4A4A5A")
         val border  = Color.parseColor("#1E1E2A")
 
         fun dp(v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), resources.displayMetrics).toInt()
@@ -135,7 +135,7 @@ class AppLauncher : Activity() {
         // Subtitle
         val sub = TextView(this).apply {
             text = "Configure connection settings"
-            setTextColor(hint)
+            setTextColor(hintColor)
             textSize = 13f
             gravity = Gravity.CENTER
             layoutParams = LinearLayout.LayoutParams(
@@ -158,7 +158,7 @@ class AppLauncher : Activity() {
             hint = "wss://xxxx.pike.replit.dev/ws"
             setText(BotConfig.getServerUrl(this@AppLauncher))
             setTextColor(textCol)
-            setHintTextColor(hint)
+            setHintTextColor(hintColor)
             textSize = 13f
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
             setBackgroundColor(Color.TRANSPARENT)
@@ -199,7 +199,7 @@ class AppLauncher : Activity() {
             hint = "https://xxxx.pike.replit.dev"
             setText(BotConfig.getDashboardUrl(this@AppLauncher))
             setTextColor(textCol)
-            setHintTextColor(hint)
+            setHintTextColor(hintColor)
             textSize = 13f
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
             setBackgroundColor(Color.TRANSPARENT)
@@ -228,7 +228,7 @@ class AppLauncher : Activity() {
         // ── Info hint ──
         val info = TextView(this).apply {
             text = "Grant all permissions first, then enter your Replit URLs and tap Confirm."
-            setTextColor(hint)
+            setTextColor(hintColor)
             textSize = 11f
             gravity = Gravity.CENTER
             layoutParams = LinearLayout.LayoutParams(
