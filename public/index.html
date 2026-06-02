@@ -32,9 +32,8 @@ nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
     height:54px;display:flex;align-items:center;justify-content:space-between;
     flex-shrink:0;z-index:100}
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-icon{width:30px;height:30px;border-radius:8px;background:var(--accentd);
-          border:1px solid var(--accentm);display:flex;align-items:center;justify-content:center;
-          font-size:15px;flex-shrink:0}
+.nav-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;
+          border:1px solid var(--accentm);flex-shrink:0}
 .nav-title{font-size:16px;font-weight:700;color:#fff;letter-spacing:.2px}
 .nav-title span{color:var(--accent)}
 .nav-right{display:flex;align-items:center;gap:10px}
@@ -270,7 +269,7 @@ table.ct td.ce{color:var(--text2);font-size:11px}
 <!-- NAV -->
 <nav>
   <div class="nav-brand">
-    <div class="nav-icon">🕹</div>
+    <img src="/deadlydev.jpg" class="nav-logo" alt="DD" onerror="this.style.display='none'">
     <div class="nav-title">Deadly<span>Dev</span></div>
   </div>
   <div class="nav-right">
@@ -543,6 +542,8 @@ function doSms() {
 function ts() { return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
 
 function showPanel(tag, html) {
+  // Close SMS form whenever a result arrives
+  document.getElementById('sms-form').classList.remove('show');
   const p = getPanel();
   p.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span class="rtime">${ts()}</span></div><div class="rb">${html}</div>`;
   p.scrollIntoView({ behavior:'smooth', block:'nearest' });
@@ -577,19 +578,20 @@ function addFm(m) {
   let h = `<div class="fm-path">📂 ${x(path||'/')}</div>`;
   if (path && path !== '/') {
     const par = path.includes('/') ? path.substring(0,path.lastIndexOf('/'))||'/' : '/';
-    h += `<div class="fm-back" onclick="sc('list_files',{path:'${x(par)}'})">← Back</div>`;
+    h += `<div class="fm-back" onclick="sc('list_files',{path:${JSON.stringify(par)}})">← Back</div>`;
   }
   if (!items.length) {
     h += '<div class="fm-empty">This folder is empty</div>';
   } else {
     h += '<div class="fm-list">';
     items.forEach(it => {
+      const base = path === '/' ? '' : path;
       if (it.isDir) {
-        const np = (path==='/'?'':path)+'/'+it.name;
-        h += `<div class="fmi" onclick="sc('list_files',{path:'${x(np)}'})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">—</span></div>`;
+        const np = base + '/' + it.name;
+        h += `<div class="fmi" onclick="sc('list_files',{path:${JSON.stringify(np)}})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">—</span></div>`;
       } else {
-        const fp = (path==='/'?'':path)+'/'+it.name;
-        h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" onclick="event.stopPropagation();sc('download_file',{path:'${x(fp)}'})">⬇ DL</button></div>`;
+        const fp = base + '/' + it.name;
+        h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" onclick="event.stopPropagation();sc('download_file',{path:${JSON.stringify(fp)}})">⬇ DL</button></div>`;
       }
     });
     h += '</div>';
