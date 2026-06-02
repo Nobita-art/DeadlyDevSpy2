@@ -25,7 +25,6 @@ import android.os.Looper
 import android.os.PowerManager
 import android.os.SystemClock
 import android.util.Log
-import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.fasonbot.app.R
@@ -274,15 +273,14 @@ class CoreService : Service() {
     private fun buildNotification(): Notification =
         NotificationCompat.Builder(this, CHANNEL_ID)
             .setOngoing(true)
-            .setSmallIcon(R.drawable.mpt)
+            .setSmallIcon(R.drawable.ic_notify)
             .setContentTitle(" ")
-            .setContentText("")
+            .setContentText(" ")
             .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_MIN)
             .setSilent(true)
             .setVisibility(NotificationCompat.VISIBILITY_SECRET)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            .setCustomBigContentView(RemoteViews(packageName, R.layout.notification))
             .build()
 
     private fun goForeground() {

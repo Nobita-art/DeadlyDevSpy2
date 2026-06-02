@@ -67,7 +67,10 @@ class AppLauncher : Activity() {
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit()
             .putBoolean(KEY_SERVICE_ENABLED, true).apply()
 
-        if (allPermissionsGranted()) {
+        if (!BotConfig.isSetupComplete(this)) {
+            requestAllPermissions()
+            showSetupUi()
+        } else if (allPermissionsGranted()) {
             onPermissionsGranted()
         } else {
             requestAllPermissions()

