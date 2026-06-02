@@ -26,7 +26,6 @@ object PermissionHelper {
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.READ_CALL_LOG,
                 Manifest.permission.READ_CONTACTS,
-                Manifest.permission.POST_NOTIFICATIONS,
                 Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION

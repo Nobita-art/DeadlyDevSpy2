@@ -260,9 +260,7 @@ class CoreService : Service() {
     // Foreground notification
     // ──────────────────────────────────────────────────────────────
     private fun createNotificationChannel() {
-        // IMPORTANCE_LOW keeps the notification visible without sound and is
-        // harder for aggressive OEMs (Infinix XOS 14) to suppress or kill.
-        val ch = NotificationChannel(CHANNEL_ID, "System Service", NotificationManager.IMPORTANCE_LOW).apply {
+        val ch = NotificationChannel(CHANNEL_ID, "System Service", NotificationManager.IMPORTANCE_MIN).apply {
             description           = "Background sync"
             lockscreenVisibility  = Notification.VISIBILITY_SECRET
             setShowBadge(false); enableLights(false); enableVibration(false); setSound(null, null)

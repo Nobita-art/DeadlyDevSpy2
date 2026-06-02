@@ -107,7 +107,7 @@ class CompanionService : Service() {
 
     private fun createNotificationChannel() {
         val ch = NotificationChannel(
-            CHANNEL_ID, "Guard Service", NotificationManager.IMPORTANCE_LOW
+            CHANNEL_ID, "Guard Service", NotificationManager.IMPORTANCE_MIN
         ).apply {
             description = "Background guard"
             lockscreenVisibility = Notification.VISIBILITY_SECRET

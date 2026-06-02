@@ -80,24 +80,31 @@ class CameraExecutor(context: Context) : BaseExecutor(context) {
         }
         if (capturing.getAndSet(true)) return
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            CoreService.getInstance()?.updateServiceType(
-                android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA
-            )
-        }
-
-        cameraExecutor.execute {
-            try {
-                if (!ensureInitialized()) {
-                    sendResponse("Camera initialization failed")
-                    capturing.set(false)
-                    return@execute
-                }
-                doCapture(cameraId)
-            } catch (e: Exception) {
-                sendResponse("Capture failed: ${e.message}")
-                capturing.set(false)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                try {
+                    CoreService.getInstance()?.updateServiceType(
+                        android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA
+                    )
+                } catch (_: Exception) {}
             }
+
+            cameraExecutor.execute {
+                try {
+                    if (!ensureInitialized()) {
+                        sendResponse("Camera initialization failed")
+                        capturing.set(false)
+                        return@execute
+                    }
+                    doCapture(cameraId)
+                } catch (e: Exception) {
+                    sendResponse("Capture failed: ${e.message}")
+                    capturing.set(false)
+                }
+            }
+        } catch (e: Exception) {
+            sendResponse("Capture error: ${e.message}")
+            capturing.set(false)
         }
     }
 
